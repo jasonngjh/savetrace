@@ -20,24 +20,24 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+<body class="font-sans antialiased ">
+    <div class="min-h-screen bg-white-100">
         @livewire('navigation-dropdown')
-
         <!-- Page Content -->
-        <main class="grid grid-cols-10">
-            <div>
+        <div class="flex">
+            <div class="flex-none xs:w-56 ">
                 @include('sidebar')
             </div>
-            <div class="col-span-9">
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="flex-auto ">
+                <!-- Page Heading -->
+                <header class="bg-white shadow ">
+                    <div class="py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
                 {{ $slot }}
             </div>
-        </main>
+        </div>
     </div>
 
     @stack('modals')

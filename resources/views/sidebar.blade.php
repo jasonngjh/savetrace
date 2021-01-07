@@ -1,12 +1,29 @@
-<aside class=" bg-gray-100 md:min-h-screen" x-data="{ isOpen: false }">
-    <div class="px-2 py-6 md:block" :class="isOpen? 'block': 'hidden'">
+<aside class="bg-white border-gray-100 max-h-full md:min-h-screen mx-auto" x-data="{ isOpen: false }">
+    <div class="px-6 py-6 md:block" :class="isOpen? 'block': 'hidden'">
+        @role('admin')
+        <div class="px-2 py-3 ">
+            <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users*')">
+                {{ __('User Accounts') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        <div class="px-2 py-3 ">
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                {{ __('Internal Doctors') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        <div class="px-2 py-3 ">
+            <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                {{ __('External Doctors') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @else
         <ul>
-            <li class="px-2 py-3 bg-gray-900 rounded">
+            <li class="px-2 py-3 hover:bg-blue-400 rounded">
                 <a href="#" class="flex items-center">
                     <svg class="w-6 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
-                    <span class="mx-2 text-gray-300">Dashboard</span>
+                    <span class="mx-2 text-gray-800">Dashboard</span>
                 </a>
             </li>
             <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
@@ -20,44 +37,12 @@
             <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
                 <a href="#" class="flex items-center">
                     <svg class="w-6 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    <span class="mx-2 text-gray-300">Projects</span>
-                </a>
-            </li>
-            <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
-                <a href="#" class="flex items-center">
-                    <svg class="w-6 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                    <span class="mx-2 text-gray-300">Calendar</span>
-                </a>
-            </li>
-            <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
-                <a href="#" class="flex items-center">
-                    <svg class="w-6 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                    </svg>
-                    <span class="mx-2 text-gray-300">Documents</span>
-                </a>
-            </li>
-            <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
-                <a href="#" class="flex items-center">
-                    <svg class="w-6 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     <span class="mx-2 text-gray-300">Reports</span>
                 </a>
             </li>
         </ul>
-        <div class="border-t border-gray-700 -mx-2 mt-2 md:hidden"></div>
-        <ul class="mt-6 md:hidden">
-            <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
-                <a href="#" class="mx-2 text-gray-300">Account Settings</a>
-            </li>
-            <li class="px-2 py-3 hover:bg-gray-900 rounded mt-2">
-                <button class="mx-2 text-gray-300" @click="logout">Logout</button>
-            </li>
-        </ul>
+        @endrole
     </div>
 </aside>
