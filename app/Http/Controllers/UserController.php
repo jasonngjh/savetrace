@@ -88,12 +88,13 @@ class UserController extends Controller
 
     public function editPost(Request $request, UpdatesUserProfileInformation $updater)
     {
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln($request);
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($request);
 
         $user = User::find($request->get("userId"));
         $updater->update($user, $request->all());
-        $user->assignRole($request['role']);
+
+        $user->syncRoles([$request->get('role')]);
 
         $user = User::find($request->get("userId"));
 
