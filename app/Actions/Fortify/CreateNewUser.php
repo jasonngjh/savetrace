@@ -25,8 +25,9 @@ class CreateNewUser implements
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'contact_number' => ['string', 'max:255'],
+            'contact_number' => ['numeric'],
             'password' => $this->passwordRules(),
+            'role' => ['required'],
         ])->validate();
 
         return DB::transaction(function () use ($input) {

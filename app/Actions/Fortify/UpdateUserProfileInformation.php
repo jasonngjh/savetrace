@@ -19,6 +19,9 @@ class UpdateUserProfileInformation implements
      */
     public function update($user, array $input)
     {
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($input);
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],

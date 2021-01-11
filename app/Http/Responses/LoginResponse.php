@@ -15,13 +15,18 @@ class LoginResponse implements
         // below is the existing response
         // replace this with your own code
         // the user can be located with Auth facade
-        if ($request->user()->hasRole('admin')) {
-            $home = '/users';
-        } else {
-            $home = '/dashboard';
-        }
 
-        //$home = auth()->user()->hasRole('admin') ? '/users' : '/dashboard';
+        if ($request->user()->first_time_login == true) {
+            $home = '/set-password';
+        } else {
+            if ($request->user()->hasRole('admin')) {
+                $home = '/users';
+            } else {
+                $home = '/dashboard';
+            }
+        }
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($home);
 
         return $request->wantsJson()
             ? response()->json(['two_factor' => false])

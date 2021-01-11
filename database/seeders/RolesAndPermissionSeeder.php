@@ -27,26 +27,28 @@ class RolesAndPermissionSeeder extends Seeder
         $userRole = Role::create(['name' => 'user']);
         Role::create(['name' => 'patient']);
 
-        $superAdmin = User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@savetrace.com',
             'password' => Hash::make('password'),
             'contact_number' => '98738321',
+            'first_time_login' => false,
         ]);
 
-        $superAdmin->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $superAdmin->id,
-            'name' => explode(' ', $superAdmin->name, 2)[0] . "'s Team",
+        $admin->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $admin->id,
+            'name' => explode(' ', $admin->name, 2)[0] . "'s Team",
             'personal_team' => true,
         ]));
 
-        $superAdmin->assignRole($adminRole);
+        $admin->assignRole($adminRole);
 
         $user = User::factory()->create([
             'name' => 'user',
             'email' => 'user@savetrace.com',
             'password' => Hash::make('password'),
             'contact_number' => '88732321',
+            'first_time_login' => true,
         ]);
 
         $user->ownedTeams()->save(Team::forceCreate([
