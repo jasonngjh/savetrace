@@ -26,21 +26,21 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-dropdown')->html();
-} elseif ($_instance->childHasBeenRendered('AH6eQQV')) {
-    $componentId = $_instance->getRenderedChildComponentId('AH6eQQV');
-    $componentTag = $_instance->getRenderedChildComponentTagName('AH6eQQV');
+} elseif ($_instance->childHasBeenRendered('WW9KSoJ')) {
+    $componentId = $_instance->getRenderedChildComponentId('WW9KSoJ');
+    $componentTag = $_instance->getRenderedChildComponentTagName('WW9KSoJ');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('AH6eQQV');
+    $_instance->preserveRenderedChild('WW9KSoJ');
 } else {
     $response = \Livewire\Livewire::mount('navigation-dropdown');
     $html = $response->html();
-    $_instance->logRenderedChild('AH6eQQV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('WW9KSoJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
         <!-- Page Content -->
         <div class="flex">
-            <div class="flex-none xs:w-56 ">
+            <div class="flex-none">
                 <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
             <div class="flex-auto ">

@@ -25,7 +25,7 @@
         @livewire('navigation-dropdown')
         <!-- Page Content -->
         <div class="flex">
-            <div class="flex-none xs:w-56 ">
+            <div class="flex-none">
                 @include('sidebar')
             </div>
             <div class="flex-auto ">
