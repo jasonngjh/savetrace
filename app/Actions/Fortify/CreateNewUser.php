@@ -27,7 +27,6 @@ class CreateNewUser implements
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'contact_number' => ['numeric'],
             'password' => $this->passwordRules(),
-            'role' => ['required'],
         ])->validate();
 
         return DB::transaction(function () use ($input) {
@@ -37,7 +36,15 @@ class CreateNewUser implements
                 'contact_number' => $input['contact_number'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
-                $this->createTeam($user);
+                $user->assignRole('patient');
+                //create patient here
+                // if (array_key_exists('role', $input)) {
+                //     $output->writeln($input['role']);
+                // } else {
+                //     $output->writeln("no role");
+                // }
+
+                //$this->createTeam($user);
             });
         });
     }

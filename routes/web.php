@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,24 +19,33 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::middleware(['auth:sanctum'])->get('/set-password', function () {
-    return view('user/set-password');
-})->name('users.set-passwordView');
-
-Route::middleware(['auth:sanctum'])->post('/set-password', [UserController::class, 'setPassword'])->name('users.set-password');
-
 Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['role:admin', 'auth:sanctum'])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['role:admin'])->group(function () {
+        // user accounts
+        Route::get('/users', [UserController::class, 'index'])->name('users');
+        Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
+        Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+        Route::post('/users/add', [UserController::class, 'addPost'])->name('users.add.post');
+        Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
 
-    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+        // internal doctors
+        Route::get('/internalDocs', [DoctorController::class, 'admin_main'])->name('internaldocs');
+        Route::get('/internalDocs/search', [DoctorController::class, 'search'])->name('internaldocs.search');
+        Route::get('/internalDocs/add', [DoctorController::class, 'add'])->name('internaldocs.add');
+        Route::get('/internalDocs/edit', [DoctorController::class, 'edit'])->name('internaldocs.edit');
 
-    Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
-    Route::post('/users/add', [UserController::class, 'addPost'])->name('users.add.post');
+        //external doctors
+        Route::get('/externalDocs', [DoctorController::class, 'admin_main'])->name('externaldocs');
+        Route::get('/externalDocs/search', [DoctorController::class, 'search'])->name('externaldocs.search');
+        Route::get('/externalDocs/add', [DoctorController::class, 'add'])->name('externaldocs.add');
+        Route::get('/externalDocs/edit', [DoctorController::class, 'edit'])->name('externaldocs.edit');
+    });
 
-    Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('/users/edit', [UserController::class, 'editPost'])->name('users.edit.post');
+    Route::middleware(['role:internal|external|patient|employee'])->get('/home', function () {
+        return view('home');
+    })->name('home');
 });

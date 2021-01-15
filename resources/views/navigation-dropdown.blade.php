@@ -5,17 +5,17 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    @if(Auth::user()->roles->first()->name == "admin")
+                    <a href="{{ route('users') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
-                </div>
+                    @else
+                    <a href="{{ route('home') }}">
+                        <x-jet-application-mark class="block h-9 w-auto" />
+                    </a>
+                    @endif
 
-                <!-- Navigation Links
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        //{{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                </div> -->
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -120,9 +120,15 @@
             <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
                 {{ __('User Accounts') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('internaldocs') }}" :active="request()->routeIs('internaldocs')">
+                {{ __('Internal Doctors') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('externaldocs') }}" :active="request()->routeIs('externaldocs')">
+                {{ __('External Doctors') }}
+            </x-jet-responsive-nav-link>
             @else
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Home') }}
             </x-jet-responsive-nav-link>
             @endrole
 

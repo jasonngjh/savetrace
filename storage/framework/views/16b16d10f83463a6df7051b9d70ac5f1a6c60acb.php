@@ -39,7 +39,7 @@
 <?php endif; ?> 
 
         <div class="mb-4 text-sm text-gray-600">
-            <?php echo e(__('Set a new password!')); ?>
+            <?php echo e(__('It's your first time logging in! Set a new password!')); ?>
 
         </div>
 
@@ -127,4 +127,4 @@
 <?php unset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
-<?php endif; ?> <?php /**PATH /Users/jasonng/Desktop/SaveTrace/resources/views/user/set-password.blade.php ENDPATH**/ ?>
+<?php endif; ?>  ?><?php /**PATH /Users/jasonng/Desktop/SaveTrace/resources/views/user/set-password.blade.php ENDPATH**/ ?>

@@ -24,39 +24,47 @@ class RolesAndPermissionSeeder extends Seeder
         //Permission::create(['name' => '']);
 
         $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $internalDocRole = Role::create(['name' => 'internal']);
+        $externalDocRole = Role::create(['name' => 'external']);
+        $employeeRole = Role::create(['name' => 'employee']);
         Role::create(['name' => 'patient']);
 
         $admin = User::factory()->create([
-            'name' => 'Admin',
+            'name' => 'admin',
             'email' => 'admin@savetrace.com',
             'password' => Hash::make('password'),
             'contact_number' => '98738321',
-            'first_time_login' => false,
         ]);
-
-        $admin->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $admin->id,
-            'name' => explode(' ', $admin->name, 2)[0] . "'s Team",
-            'personal_team' => true,
-        ]));
 
         $admin->assignRole($adminRole);
 
-        $user = User::factory()->create([
-            'name' => 'user',
-            'email' => 'user@savetrace.com',
+        $internalDoc = User::factory()->create([
+            'name' => 'internal doctor',
+            'email' => 'internalDoc@savetrace.com',
             'password' => Hash::make('password'),
             'contact_number' => '88732321',
-            'first_time_login' => true,
+            'role_id' => 1,
         ]);
 
-        $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
-            'personal_team' => true,
-        ]));
+        $internalDoc->assignRole($internalDocRole);
 
-        $user->assignRole($userRole);
+        $externalDoc = User::factory()->create([
+            'name' => 'external doctor',
+            'email' => 'externalDoc@externalclinic.com',
+            'password' => Hash::make('password'),
+            'contact_number' => '88732321',
+            'role_id' => 3,
+        ]);
+
+        $externalDoc->assignRole($externalDocRole);
+
+        $employee = User::factory()->create([
+            'name' => 'employee',
+            'email' => 'employee@savetrace.com',
+            'password' => Hash::make('password'),
+            'contact_number' => '98458321',
+        ]);
+
+        $employee->assignRole($employeeRole);
     }
 }

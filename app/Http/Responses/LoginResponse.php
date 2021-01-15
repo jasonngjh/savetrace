@@ -4,6 +4,7 @@ namespace App\Http\Responses;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Illuminate\Support\Facades\Route;
 
 class LoginResponse implements
     LoginResponseContract
@@ -16,20 +17,14 @@ class LoginResponse implements
         // replace this with your own code
         // the user can be located with Auth facade
 
-        if ($request->user()->first_time_login == true) {
-            $home = '/set-password';
+        if ($request->user()->hasRole('admin')) {
+            $home = 'users';
         } else {
-            if ($request->user()->hasRole('admin')) {
-                $home = '/users';
-            } else {
-                $home = '/dashboard';
-            }
+            $home = 'home';
         }
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $output->writeln($home);
 
         return $request->wantsJson()
             ? response()->json(['two_factor' => false])
-            : redirect($home);
+            : redirect()->route($home);
     }
 }

@@ -39,10 +39,10 @@
 <?php endif; ?> 
 
         <?php if(session('status')): ?>
-            <div class="mb-4 font-medium text-sm text-green-600">
-                <?php echo e(session('status')); ?>
+        <div class="mb-4 font-medium text-sm text-green-600">
+            <?php echo e(session('status')); ?>
 
-            </div>
+        </div>
         <?php endif; ?>
 
         <form method="POST" action="<?php echo e(route('login')); ?>">
@@ -111,10 +111,10 @@
 
             <div class="flex items-center justify-end mt-4">
                 <?php if(Route::has('password.request')): ?>
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
-                        <?php echo e(__('Forgot your password?')); ?>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="<?php echo e(route('password.request')); ?>">
+                    <?php echo e(__('Forgot your password?')); ?>
 
-                    </a>
+                </a>
                 <?php endif; ?>
 
                  <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -133,6 +133,12 @@
 <?php endif; ?> 
             </div>
         </form>
+        <div class="flex items-center justify-center mt-6">
+            <?php if(Route::has('register')): ?>
+            Need An Account? <a href="<?php echo e(route('register')); ?>" class="ml-4 text-sm text-gray-700 underline">Register</a>
+            <?php endif; ?>
+        </div>
+
      <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
@@ -144,5 +150,4 @@
 <?php unset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
-<?php endif; ?> 
-<?php /**PATH /Users/jasonng/Desktop/SaveTrace/resources/views/auth/login.blade.php ENDPATH**/ ?>
+<?php endif; ?> <?php /**PATH /Users/jasonng/Desktop/SaveTrace/resources/views/auth/login.blade.php ENDPATH**/ ?>

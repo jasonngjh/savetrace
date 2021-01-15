@@ -25,9 +25,9 @@
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
 
-        <form method="POST" action="<?php echo e(route('users.store')); ?>">
+        <form method="POST" action="<?php echo e(route('users.add.post')); ?>">
             <?php echo csrf_field(); ?>
-            <div>
+            <div class="mt-4">
                  <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'name','value' => ''.e(__('Name')).'']]); ?>
 <?php $component->withName('jet-label'); ?>

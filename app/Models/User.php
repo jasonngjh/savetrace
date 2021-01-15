@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'contact_number', 'first_time_login'
+        'name', 'email', 'password', 'contact_number', 'role_id'
     ];
 
     /**
@@ -41,7 +41,6 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        'first_time_login',
     ];
 
     /**

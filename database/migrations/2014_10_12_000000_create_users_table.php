@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
-            $table->boolean('first_time_login')->default(true);
+            $table->bigInteger('role_id')->nullable();
         });
     }
 
