@@ -20,6 +20,9 @@ class DoctorSeeder extends Seeder
             'address' => '585 North Bridge Road, Raffles Hospital, Singapore 188770',
             'tel' => '63111111',
             'created_at' => now(),
+            'opening_time' => 'Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.',
         ]);
 
         $practice2 = PracticePlace::create([
@@ -27,11 +30,16 @@ class DoctorSeeder extends Seeder
             'address' => '3 Mount Elizabeth, Mount Elizabeth Medical Centre , #07-01 Singapore 228510',
             'tel' => '68872020',
             'created_at' => now(),
+            'opening_time' => 'Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.',
         ]);
 
         $internalDocWithId = Doctor::create([
             'name' => 'Tan Eik Hock Andrew',
             'registration_number' => 'M10086B',
+            'email' => 'andrew@raffleshospital.com',
+            'contact' => '63111102',
             'internal' => true,
             'specialty' => 'Nuclear Medicine',
             'practice_place' => $practice->id,
@@ -52,10 +60,13 @@ class DoctorSeeder extends Seeder
             'name' => 'Ajeet Madhav Wagle',
             'registration_number' => 'M10797B',
             'internal' => false,
+            'email' => 'ajeetwagle@gmail.com',
+            'contact' => '6443 2020',
             'specialty' => 'Ophthalmology',
             'practice_place' => $practice2->id,
             'created_at' => now(),
             'user_id' => 3,
+            'information' => 'Dr. Ajeet Madhav Wagle is a Medical Director and Senior Consultant at International Eye Cataract Retina Centre at Farrer Park Medical Centre. He specializes in the medical and surgical management of retinal diseases such as retinal detachment, macular degeneration, diabetic retinopathy, retinal vascular occlusions as well as advanced modern cataract surgery and comprehensive eye care.',
         ]);
 
         $externalDocWithOutId = Doctor::create([

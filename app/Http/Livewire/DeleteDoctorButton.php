@@ -71,7 +71,6 @@ class DeleteDoctorButton extends Component
     protected function removeRoleIdFromUser($doctor)
     {
         $user = User::find($doctor->user_id);
-        $output->writeln($user);
         $user->forceFill([
             'role_id' => null,
         ])->save();

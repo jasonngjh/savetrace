@@ -50,6 +50,9 @@ class AddNewDoctorForm extends Component
                 'registration_number' => ['required', 'unique:doctors', 'string', 'max:255'],
                 'name' => ['required', 'string', 'max:255'],
                 'specialty' => ['required', 'string', 'max:255'],
+                'email' => ['email', 'string', 'max:255'],
+                'contact' => ['numeric'],
+                'fax' => ['numeric'],
                 'pp_id' => ['required']
             ])->validate();
         } else {
@@ -57,24 +60,35 @@ class AddNewDoctorForm extends Component
                 'registration_number' => ['required', 'unique:doctors', 'string', 'max:255'],
                 'name' => ['required', 'string', 'max:255'],
                 'specialty' => ['required', 'string', 'max:255'],
+                'email' => ['email', 'string', 'max:255'],
+                'contact' => ['numeric'],
+                'fax' => ['numeric'],
                 'place_of_practice_name' => ['required'],
                 'place_of_practice_address' => ['required'],
-                'place_of_practice_tel' => ['required'],
+                'place_of_practice_tel' => ['required', 'numeric'],
             ])->validate();
 
             $place_of_practice = PracticePlace::create([
                 'name' => $this->state['place_of_practice_name'],
                 'address' => $this->state['place_of_practice_address'],
                 'tel' => $this->state['place_of_practice_tel'],
+                'opening_time' => $this->state['place_of_practice_opening_time'] ?? null,
                 'created_at' => now(),
             ]);
         }
+
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($this->state['email']);
 
         Doctor::create([
             'name' => $this->state['name'],
             'registration_number' => $this->state['registration_number'],
             'internal' => ($this->route == "internaldocs") ? true : false,
             'specialty' => $this->state['specialty'],
+            'email' => $this->state['email'] ?? null,
+            'contact' => $this->state['contact'] ?? null,
+            'fax' => $this->state['fax'] ?? null,
+            'information' => $this->state['information'] ?? null,
             'practice_place' => ($this->link) ? $this->state['pp_id'] : $place_of_practice->id,
             'created_at' => now(),
         ]);

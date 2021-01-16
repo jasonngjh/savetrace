@@ -21,6 +21,10 @@ class Doctor extends Model
         'registration_number',
         'internal',
         'specialty',
+        'email',
+        'contact',
+        'fax',
+        'information',
         'practice_place',
         'user_id',
     ];
