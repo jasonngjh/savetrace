@@ -13,7 +13,7 @@ class CreatePracticePlacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('practiceplaces', function (Blueprint $table) {
+        Schema::create('practice_places', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('name');
@@ -30,6 +30,6 @@ class CreatePracticePlacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('practiceplaces');
+        Schema::dropIfExists('practice_places');
     }
 }

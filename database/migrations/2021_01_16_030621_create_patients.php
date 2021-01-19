@@ -24,7 +24,7 @@ class CreatePatients extends Migration
             $table->string('contact_number_of_emergency_contact')->nullable();;
             $table->string('address');
             $table->text('profile_photo_path')->nullable();
-            $table->string('allergies')->nullable();
+            $table->text('allergies')->nullable();
         });
     }
 

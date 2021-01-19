@@ -25,7 +25,7 @@ class CreateDoctorTable extends Migration
             $table->string('specialty');
             $table->text('profile_photo_path')->nullable();
             $table->text('information')->nullable();
-            $table->foreignId('practice_place')->constrained('practiceplaces');
+            $table->foreignId('practice_place')->constrained('practice_places');
             $table->foreignId('user_id')->nullable()->constrained('users');
         });
     }

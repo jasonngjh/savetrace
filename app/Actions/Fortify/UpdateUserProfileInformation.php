@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
+use App\Models\Doctor;
+use App\Models\Patient;
 
 class UpdateUserProfileInformation implements
     UpdatesUserProfileInformation
@@ -41,6 +43,22 @@ class UpdateUserProfileInformation implements
                 'email' => $input['email'],
                 'contact_number' => $input['contact_number'],
             ])->save();
+        }
+
+        if (!$user->profile_photo_path && $user->role_id) {
+            if ($user->hasRole(['internal', 'external'])) {
+                $doctor = Doctor::find($user->role_id);
+                if ($doctor->profile_photo_path) {
+                    $doctor->profile_photo_path = null;
+                    $doctor->save();
+                }
+            } elseif ($user->hasRole('patient')) {
+                $patient = Patient::find($user->role_id);
+                if ($patient->profile_photo_path) {
+                    $patient->profile_photo_path = null;
+                    $patient->save();
+                }
+            }
         }
     }
 

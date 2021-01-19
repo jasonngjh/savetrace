@@ -25,9 +25,11 @@
         @livewire('navigation-dropdown')
         <!-- Page Content -->
         <div class="flex">
+            @if(!Auth::user()->hasRole("patient"))
             <div class="flex-none">
                 @include('sidebar')
             </div>
+            @endif
             <div class="flex-auto ">
                 <!-- Page Heading -->
                 <header class="bg-white shadow ">

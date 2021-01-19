@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Patient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -22,12 +23,23 @@ class CreateNewUser implements
      */
     public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'contact_number' => ['numeric'],
-            'password' => $this->passwordRules(),
-        ])->validate();
+        if (!array_key_exists('role', $input)) {
+            Validator::make($input, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'contact_number' => ['numeric'],
+                'password' => $this->passwordRules(),
+                'dob' => ['date', 'before:today'],
+                'address' => ['required', 'string'],
+            ])->validate();
+        } else {
+            Validator::make($input, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'contact_number' => ['numeric'],
+                'password' => $this->passwordRules(),
+            ])->validate();
+        }
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
@@ -35,15 +47,11 @@ class CreateNewUser implements
                 'email' => $input['email'],
                 'contact_number' => $input['contact_number'],
                 'password' => Hash::make($input['password']),
-            ]), function (User $user) {
+            ]), function (User $user) use ($input) {
                 $user->assignRole('patient');
-                //create patient here
-                // if (array_key_exists('role', $input)) {
-                //     $output->writeln($input['role']);
-                // } else {
-                //     $output->writeln("no role");
-                // }
-
+                if (!array_key_exists('role', $input)) {
+                    $this->createPatient($user, $input);
+                }
                 //$this->createTeam($user);
             });
         });
@@ -62,5 +70,29 @@ class CreateNewUser implements
             'name' => explode(' ', $user->name, 2)[0] . "'s Team",
             'personal_team' => true,
         ]));
+    }
+
+    /**
+     * Create a patient for the user.
+     *
+     * @param  \App\Models\User  $user
+     * @return void
+     */
+    protected function createPatient(User $user, $input)
+    {
+        $dob = date_format(date_create_from_format('d-m-Y', $input['dob']), 'Y-m-d');
+        $patient = Patient::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'date_of_birth' => $dob,
+            'contact_number' => $user->contact_number,
+            'address' => $input['address'],
+        ]);
+
+        $patient->save();
+
+        $user->forceFill([
+            'role_id' => $patient->id,
+        ])->save();
     }
 }

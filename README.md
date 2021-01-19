@@ -11,6 +11,7 @@ Install the following:
 -   PHP 8.0.0
 -   composer 2.0.8
 -   XAMPP
+-   npm
 
 ## Clone project to local directory
 
@@ -26,14 +27,31 @@ Install all of the project dependencies
 
 ```
 cd savetrace
-composer install
+composer install --ignore-platform-reqs
 npm install
+copy .env.example .env (windows) / cp .env.example .env (bash)
+php artisan key:generate
+php artisan storage:link
+```
+
+### Change App URL
+
+1. open .env file inside savetrace folder
+2. remove everything after APP_URL=
+
+```
+APP_DEBUG=true
+APP_URL=
+
+LOG_CHANNEL=stack
 ```
 
 ### Starting Database
 
 1. Start XAMPP
-2. Under Manage Servers, click on MySQL Database and Start
+2. Under Manage Servers, start both MySQL Database and Apache
+3. Open Web Browser and go to localhost/phpmyadmin
+4. Create database name 'savetrace'
 
 ### Setup Database
 

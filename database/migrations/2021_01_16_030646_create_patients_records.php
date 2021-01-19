@@ -13,7 +13,7 @@ class CreatePatientsRecords extends Migration
      */
     public function up()
     {
-        Schema::create('PatientRecord', function (Blueprint $table) {
+        Schema::create('patient_records', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('patient_id')->constrained('patients');
@@ -31,10 +31,10 @@ class CreatePatientsRecords extends Migration
      */
     public function down()
     {
-        Schema::table('PatientRecord', function (Blueprint $table) {
+        Schema::table('patient_records', function (Blueprint $table) {
             $table->dropForeign(['patient_id']);
             $table->dropForeign(['doctor_id']);
         });
-        Schema::dropIfExists('PatientRecord');
+        Schema::dropIfExists('patient_records');
     }
 }

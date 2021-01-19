@@ -27,6 +27,7 @@ class Doctor extends Model
         'information',
         'practice_place',
         'user_id',
+        'profile_photo_path',
     ];
 
     /**
@@ -34,7 +35,9 @@ class Doctor extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'profile_photo_path',
+    ];
 
     /**
      * The accessors to append to the model's array form.

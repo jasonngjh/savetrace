@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth/login');
-});
+})->name('/');
+
+Route::get('/search-all-doctors', function () {
+    return view('doctors.search_all_doctors');
+})->name('all.search');
 
 Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');

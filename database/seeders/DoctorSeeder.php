@@ -15,7 +15,7 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        $practice = practiceplace::create([
+        $practice = PracticePlace::create([
             'name' => 'Raffles Hospital',
             'address' => '585 North Bridge Road, Raffles Hospital, Singapore 188770',
             'tel' => '63111111',

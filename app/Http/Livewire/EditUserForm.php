@@ -7,6 +7,8 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Spatie\Permission\Models\Role;
 
 
@@ -48,6 +50,18 @@ class EditUserForm extends Component
 
         $user->syncRoles([$this->state['roles']]);
 
+        if ($user->role_id) {
+            if ($user->hasRole(['internal', 'external'])) {
+                $doctor = Doctor::find($user->role_id);
+                $doctor->profile_photo_path = $user->profile_photo_path;
+                $doctor->save();
+            } else {
+                $patient = Patient::find($user->role_id);
+                $patient->profile_photo_path = $user->profile_photo_path;
+                $patient->save();
+            }
+        }
+
         if ($user->id == Auth::user()->id) {
             $this->emit('refresh-navigation-menu');
         }
@@ -64,6 +78,18 @@ class EditUserForm extends Component
     {
         $user = User::find($this->state['id']);
         $user->deleteProfilePhoto();
+
+        if ($user->role_id) {
+            if ($user->hasRole(['internal', 'external'])) {
+                $doctor = Doctor::find($user->role_id);
+                $doctor->profile_photo_path = null;
+                $doctor->save();
+            } else {
+                $patient = Patient::find($user->role_id);
+                $patient->profile_photo_path = null;
+                $patient->save();
+            }
+        }
 
         if ($user->id == Auth::user()->id) {
             $this->emit('refresh-navigation-menu');

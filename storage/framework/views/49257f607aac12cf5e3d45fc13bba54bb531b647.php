@@ -26,23 +26,25 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-dropdown')->html();
-} elseif ($_instance->childHasBeenRendered('WW9KSoJ')) {
-    $componentId = $_instance->getRenderedChildComponentId('WW9KSoJ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('WW9KSoJ');
+} elseif ($_instance->childHasBeenRendered('iKn8uLO')) {
+    $componentId = $_instance->getRenderedChildComponentId('iKn8uLO');
+    $componentTag = $_instance->getRenderedChildComponentTagName('iKn8uLO');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('WW9KSoJ');
+    $_instance->preserveRenderedChild('iKn8uLO');
 } else {
     $response = \Livewire\Livewire::mount('navigation-dropdown');
     $html = $response->html();
-    $_instance->logRenderedChild('WW9KSoJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('iKn8uLO', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
         <!-- Page Content -->
         <div class="flex">
+            <?php if(!Auth::user()->hasRole("patient")): ?>
             <div class="flex-none">
                 <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
+            <?php endif; ?>
             <div class="flex-auto ">
                 <!-- Page Heading -->
                 <header class="bg-white shadow ">
