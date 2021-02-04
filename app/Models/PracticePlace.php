@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PracticePlace extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
@@ -26,6 +28,6 @@ class PracticePlace extends Model
 
     public function doctor()
     {
-        return $this->hasMany('App\Models\Doctor');
+        return $this->hasMany(Doctor::class)->withTrashed();
     }
 }

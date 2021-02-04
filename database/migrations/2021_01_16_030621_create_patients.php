@@ -25,6 +25,7 @@ class CreatePatients extends Migration
             $table->string('address');
             $table->text('profile_photo_path')->nullable();
             $table->text('allergies')->nullable();
+            $table->softDeletes();
         });
     }
 
@@ -37,6 +38,7 @@ class CreatePatients extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
+            $table->dropSoftDeletes();
         });
         Schema::dropIfExists('patients');
     }

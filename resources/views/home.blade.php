@@ -4,7 +4,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div>
+                <!-- <div class="overflow-hidden shadow-xl sm:rounded-lg"> -->
                 @hasanyrole('internal|external')
 
                 <!-- To edit homepage design at resources/views/livewire/.. -->
@@ -15,8 +16,8 @@
                 @livewire('patients.homepage')
                 @endrole
 
-                @role('employee')
-                @livewire('employee.homepage')
+                @role('nurse')
+                @livewire('employees.homepage')
                 @endrole
             </div>
         </div>

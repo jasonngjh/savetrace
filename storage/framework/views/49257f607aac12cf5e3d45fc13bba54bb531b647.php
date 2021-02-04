@@ -22,30 +22,31 @@
 </head>
 
 <body class="font-sans antialiased ">
-    <div class="min-h-screen bg-white-100">
+    <div class="min-h-screen bg-blue-100">
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('navigation-dropdown')->html();
-} elseif ($_instance->childHasBeenRendered('iKn8uLO')) {
-    $componentId = $_instance->getRenderedChildComponentId('iKn8uLO');
-    $componentTag = $_instance->getRenderedChildComponentTagName('iKn8uLO');
+} elseif ($_instance->childHasBeenRendered('NfKILDu')) {
+    $componentId = $_instance->getRenderedChildComponentId('NfKILDu');
+    $componentTag = $_instance->getRenderedChildComponentTagName('NfKILDu');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('iKn8uLO');
+    $_instance->preserveRenderedChild('NfKILDu');
 } else {
     $response = \Livewire\Livewire::mount('navigation-dropdown');
     $html = $response->html();
-    $_instance->logRenderedChild('iKn8uLO', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('NfKILDu', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
         <!-- Page Content -->
         <div class="flex">
+            <?php if(auth()->guard()->check()): ?>
             <?php if(!Auth::user()->hasRole("patient")): ?>
-            <div class="flex-none">
+            <div class="sticky bg-white h-screen top-0 flex-none">
                 <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
             <?php endif; ?>
-            <div class="flex-auto ">
+            <div class="flex-auto">
                 <!-- Page Heading -->
                 <header class="bg-white shadow ">
                     <div class="py-6 px-4 sm:px-6 lg:px-8">
@@ -56,6 +57,20 @@ echo $html;
                 <?php echo e($slot); ?>
 
             </div>
+            <?php endif; ?>
+            <?php if(auth()->guard()->guest()): ?>
+            <div class="flex-auto">
+                <!-- Page Heading -->
+                <header class="bg-white shadow flex">
+                    <div class="py-6 px-4 sm:px-6 lg:px-8">
+                        <?php echo e($header); ?>
+
+                    </div>
+                </header>
+                <?php echo e($slot); ?>
+
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 

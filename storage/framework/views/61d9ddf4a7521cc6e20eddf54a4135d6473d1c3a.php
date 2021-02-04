@@ -18,15 +18,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('edit-doctor-form', [$doctor])->html();
-} elseif ($_instance->childHasBeenRendered('XmmrKD6')) {
-    $componentId = $_instance->getRenderedChildComponentId('XmmrKD6');
-    $componentTag = $_instance->getRenderedChildComponentTagName('XmmrKD6');
+} elseif ($_instance->childHasBeenRendered('8ORp8YT')) {
+    $componentId = $_instance->getRenderedChildComponentId('8ORp8YT');
+    $componentTag = $_instance->getRenderedChildComponentTagName('8ORp8YT');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('XmmrKD6');
+    $_instance->preserveRenderedChild('8ORp8YT');
 } else {
     $response = \Livewire\Livewire::mount('edit-doctor-form', [$doctor]);
     $html = $response->html();
-    $_instance->logRenderedChild('XmmrKD6', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('8ORp8YT', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

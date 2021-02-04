@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     @auth
-                    @if(Auth::user()->roles->first()->name == "admin")
+                    @if(Auth::user()->roles->first()->name == "system admin")
                     <a href="{{ route('users') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
@@ -28,7 +28,7 @@
                 <!-- Find a doctor -->
                 <div class="flex-shrink-0 flex items-center">
                     @if(Auth::user()->roles->first()->name == "patient")
-                    <a href="{{ route('users') }}">
+                    <a href="{{ route('all.search') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                     @endif
@@ -129,7 +129,7 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        @role('admin')
+                        @role('system admin')
                         <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
                             {{ __('User Accounts') }}
                         </x-jet-responsive-nav-link>

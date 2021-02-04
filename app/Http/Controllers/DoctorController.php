@@ -32,6 +32,18 @@ class DoctorController extends Controller
         return view('doctors.main', ['docData' => $data]);
     }
 
+    public function retrieve_all_doctors()
+    {
+        $data = Doctor::paginate(15, ['id', 'name', 'registration_number', 'email', 'specialty', 'practice_place']);
+
+        foreach ($data as $doctor) {
+            $nameofpractice = PracticePlace::find($doctor->practice_place);
+            $doctor['practice_place_name'] = $nameofpractice->name;
+        }
+
+        return view('doctors.view_all_doctors', ['docData' => $data]);
+    }
+
     public function search(Request $request)
     {
         if ($request->filled('q')) {
@@ -69,5 +81,10 @@ class DoctorController extends Controller
         $doctor->practice_place_details = $practice_place;
 
         return view('doctors.edit', ['doctor' => $doctor, 'message' => $request->get('message')]);
+    }
+
+    public function view(Request $request, $id)
+    {
+        return view('doctors.view', ['id' => $id]);
     }
 }

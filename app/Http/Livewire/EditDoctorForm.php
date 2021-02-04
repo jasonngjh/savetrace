@@ -33,13 +33,14 @@ class EditDoctorForm extends Component
     public function mount($doctor)
     {
         $this->state = $doctor->toArray();
+
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($this->state);
+
         $user = User::find($this->state['user_id']);
         if ($user) {
             $user_details = $user->name . " - " . $user->email;
             $this->state['user_details'] = $user_details;
-
-            // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-            // $output->writeln($user_details);
         }
         $this->route = Route::currentRouteName();
     }

@@ -23,10 +23,10 @@ class RolesAndPermissionSeeder extends Seeder
         // create permissions
         //Permission::create(['name' => '']);
 
-        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole = Role::create(['name' => 'system admin']);
         $internalDocRole = Role::create(['name' => 'internal']);
         $externalDocRole = Role::create(['name' => 'external']);
-        $employeeRole = Role::create(['name' => 'employee']);
+        $employeeRole = Role::create(['name' => 'nurse']);
         Role::create(['name' => 'patient']);
 
         $admin = User::factory()->create([

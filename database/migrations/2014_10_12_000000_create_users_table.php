@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
             $table->bigInteger('role_id')->nullable();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +36,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
         Schema::dropIfExists('users');
     }
 }

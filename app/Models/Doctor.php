@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Doctor extends Model
 {
     use HasFactory;
     use HasProfilePhoto;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -35,9 +37,7 @@ class Doctor extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'profile_photo_path',
-    ];
+    protected $hidden = [];
 
     /**
      * The accessors to append to the model's array form.
@@ -47,4 +47,9 @@ class Doctor extends Model
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function PracticePlace()
+    {
+        return $this->belongsTo(PracticePlace::class, 'practice_place');
+    }
 }

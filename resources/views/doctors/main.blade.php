@@ -54,33 +54,36 @@
                     </thead>
                     <tbody>
                         @foreach($docData as $doctor)
-                        <tr>
-                            <td class="border-dashed border-t border-gray-200 ">
-                                <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->registration_number}}</span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200 ">
-                                <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->name}}</span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->specialty}}</span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->practice_place_name}}</span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <div class="flex">
-                                    <form method="GET" action="{{ route( strtok(Route::currentRouteName(), '.') . '.edit') }}">
-                                        <input name="doctorId" id="doctorId" value="{{ $doctor->id }}" type="hidden">
-                                        <button class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                    @livewire('delete-doctor-button', [$doctor])
-                                </div>
-                            </td>
-                        </tr>
+                        <form method="GET" action="{{ route( strtok(Route::currentRouteName(), '.') . '.edit') }}">
+                            <tr class="button">
+                                <td class=" border-dashed border-t border-gray-200 ">
+                                    <span class=" text-gray-700 px-6 py-3 flex items-center">{{$doctor->registration_number}}</span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200 ">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->name}}</span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->specialty}}</span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center">{{$doctor->practice_place_name}}</span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <div class="flex">
+                                        <form method="GET" action="{{ route( strtok(Route::currentRouteName(), '.') . '.edit') }}">
+                                            <input name="doctorId" id="doctorId" value="{{ $doctor->id }}" type="hidden">
+                                            <button class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        @livewire('delete-doctor-button', [$doctor])
+                                    </div>
+                                </td>
+                            </tr>
+                        </form>
+
                         @endforeach
                     </tbody>
                 </table>

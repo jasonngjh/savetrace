@@ -27,7 +27,6 @@ class RoleInformationForm extends Component
             $this->state = Doctor::find($user->role_id)->toArray();
             $practice_place = PracticePlace::find($this->state['practice_place']);
             $this->state['practice_place_name'] = $practice_place->name;
-            $output->writeln($this->state['practice_place_name']);
         }
     }
 

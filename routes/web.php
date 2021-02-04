@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +24,14 @@ Route::get('/search-all-doctors', function () {
     return view('doctors.search_all_doctors');
 })->name('all.search');
 
+Route::get('/doctors/profile/{id}', [DoctorController::class, 'view'])->name('doctors.view');
+
 Route::middleware(['auth'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('home');
 })->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['role:system admin'])->group(function () {
         // user accounts
         Route::get('/users', [UserController::class, 'index'])->name('users');
         Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
@@ -49,7 +52,21 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/externalDocs/edit', [DoctorController::class, 'edit'])->name('externaldocs.edit');
     });
 
-    Route::middleware(['role:internal|external|patient|employee'])->get('/home', function () {
+    Route::middleware(['role:internal|external|patient|nurse'])->get('/home', function () {
         return view('home');
     })->name('home');
+
+    Route::middleware(['role:patient'])->group(function () {
+        Route::get('/referrals', [PatientController::class, 'viewReferrals'])->name('referrals');
+        Route::get('/appointments', [PatientController::class, 'viewAppointments'])->name('appointments');
+        Route::get('/appointments/new', [PatientController::class, 'newAppt'])->name('appointments.new');
+    });
+
+    Route::middleware(['role:internal|external'])->group(function () {
+        Route::get('/patients', [PatientController::class, 'index'])->name('patients');
+        Route::get('/patients/search', [PatientController::class, 'search'])->name('patients.search');
+
+        Route::get('/doctors', [DoctorController::class, 'retrieve_all_doctors'])->name('doctors');
+        Route::get('/doctors/search', [PatientController::class, 'search'])->name('doctors.search');
+    });
 });

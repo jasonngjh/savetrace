@@ -17,7 +17,7 @@ class LoginResponse implements
         // replace this with your own code
         // the user can be located with Auth facade
 
-        if ($request->user()->hasRole('admin')) {
+        if ($request->user()->hasRole('system admin')) {
             $home = 'users';
         } else {
             $home = 'home';

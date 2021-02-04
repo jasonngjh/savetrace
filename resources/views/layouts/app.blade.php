@@ -21,16 +21,17 @@
 </head>
 
 <body class="font-sans antialiased ">
-    <div class="min-h-screen bg-white-100">
+    <div class="min-h-screen bg-blue-100">
         @livewire('navigation-dropdown')
         <!-- Page Content -->
         <div class="flex">
+            @auth
             @if(!Auth::user()->hasRole("patient"))
-            <div class="flex-none">
+            <div class="sticky bg-white h-screen top-0 flex-none">
                 @include('sidebar')
             </div>
             @endif
-            <div class="flex-auto ">
+            <div class="flex-auto">
                 <!-- Page Heading -->
                 <header class="bg-white shadow ">
                     <div class="py-6 px-4 sm:px-6 lg:px-8">
@@ -39,6 +40,18 @@
                 </header>
                 {{ $slot }}
             </div>
+            @endauth
+            @guest
+            <div class="flex-auto">
+                <!-- Page Heading -->
+                <header class="bg-white shadow flex">
+                    <div class="py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+                {{ $slot }}
+            </div>
+            @endguest
         </div>
     </div>
 

@@ -81,47 +81,50 @@
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $docData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td class="border-dashed border-t border-gray-200 ">
-                                <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->registration_number); ?></span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200 ">
-                                <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->name); ?></span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->specialty); ?></span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->practice_place_name); ?></span>
-                            </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <div class="flex">
-                                    <form method="GET" action="<?php echo e(route( strtok(Route::currentRouteName(), '.') . '.edit')); ?>">
-                                        <input name="doctorId" id="doctorId" value="<?php echo e($doctor->id); ?>" type="hidden">
-                                        <button class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                    <?php
+                        <form method="GET" action="<?php echo e(route( strtok(Route::currentRouteName(), '.') . '.edit')); ?>">
+                            <tr class="button">
+                                <td class=" border-dashed border-t border-gray-200 ">
+                                    <span class=" text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->registration_number); ?></span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200 ">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->name); ?></span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->specialty); ?></span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <span class="text-gray-700 px-6 py-3 flex items-center"><?php echo e($doctor->practice_place_name); ?></span>
+                                </td>
+                                <td class="border-dashed border-t border-gray-200">
+                                    <div class="flex">
+                                        <form method="GET" action="<?php echo e(route( strtok(Route::currentRouteName(), '.') . '.edit')); ?>">
+                                            <input name="doctorId" id="doctorId" value="<?php echo e($doctor->id); ?>" type="hidden">
+                                            <button class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('delete-doctor-button', [$doctor])->html();
-} elseif ($_instance->childHasBeenRendered('zQKY1GW')) {
-    $componentId = $_instance->getRenderedChildComponentId('zQKY1GW');
-    $componentTag = $_instance->getRenderedChildComponentTagName('zQKY1GW');
+} elseif ($_instance->childHasBeenRendered('IeoRy4h')) {
+    $componentId = $_instance->getRenderedChildComponentId('IeoRy4h');
+    $componentTag = $_instance->getRenderedChildComponentTagName('IeoRy4h');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('zQKY1GW');
+    $_instance->preserveRenderedChild('IeoRy4h');
 } else {
     $response = \Livewire\Livewire::mount('delete-doctor-button', [$doctor]);
     $html = $response->html();
-    $_instance->logRenderedChild('zQKY1GW', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('IeoRy4h', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-                                </div>
-                            </td>
-                        </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                        </form>
+
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>

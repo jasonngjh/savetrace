@@ -1,6 +1,6 @@
 <div class="w-full h-screen">
     <?php echo csrf_field(); ?>
-    <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+    <h2 class="px-10 font-semibold text-2xl text-gray-800 leading-tight">
         Find a Doctor
     </h2>
     <div class="py-5 px-3">
@@ -11,11 +11,11 @@
     <div class="py-5 px-3 w-full" submit="search">
         <!--Search Bar -->
          <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'q','wire:model' => 'q','class' => 'block mt-1 w-full','type' => 'text','name' => 'q']]); ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input','data' => ['id' => 'q','wire:model' => 'q','class' => 'block mt-1 w-full','type' => 'text','name' => 'q','placeholder' => 'Search By Name, Phone, Email or Specialisation']]); ?>
 <?php $component->withName('jet-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['id' => 'q','wire:model' => 'q','class' => 'block mt-1 w-full','type' => 'text','name' => 'q']); ?>
+<?php $component->withAttributes(['id' => 'q','wire:model' => 'q','class' => 'block mt-1 w-full','type' => 'text','name' => 'q','placeholder' => 'Search By Name, Phone, Email or Specialisation']); ?>
 <?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
 <?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
 <?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="px-4 pt-4 grid">
-        <div class="space-y-8 grid md:grid-cols-4 grid-cols-1">
+        <div class="grid md:grid-cols-4 grid-cols-1">
             <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-span-1 bg-white shadow-xl rounded-lg :hover='bg-blue-100' ">
                 <div class="mt-2">
@@ -49,7 +49,11 @@
                         </tbody>
                     </table>
                     <div class="text-center my-3">
-                        <a class="text-xs text-blue-500 italic hover:underline hover:text-blue-600 font-medium" href="#">View Profile</a>
+                        <form method="GET" action="<?php echo e(route('doctors.view', $doctor->id )); ?>">
+                            <button class="bg-transparent text-xs text-blue-500 italic hover:underline hover:text-blue-600 font-medium">
+                                View Profile
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

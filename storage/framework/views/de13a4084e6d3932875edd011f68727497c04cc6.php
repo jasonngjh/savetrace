@@ -329,15 +329,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('user-select', ['name' => 'user_id','placeholder' => 'Link to an User Account','searchable' => true])->html();
-} elseif ($_instance->childHasBeenRendered('pvhfIiD')) {
-    $componentId = $_instance->getRenderedChildComponentId('pvhfIiD');
-    $componentTag = $_instance->getRenderedChildComponentTagName('pvhfIiD');
+} elseif ($_instance->childHasBeenRendered('zMkbwdr')) {
+    $componentId = $_instance->getRenderedChildComponentId('zMkbwdr');
+    $componentTag = $_instance->getRenderedChildComponentTagName('zMkbwdr');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('pvhfIiD');
+    $_instance->preserveRenderedChild('zMkbwdr');
 } else {
     $response = \Livewire\Livewire::mount('user-select', ['name' => 'user_id','placeholder' => 'Link to an User Account','searchable' => true]);
     $html = $response->html();
-    $_instance->logRenderedChild('pvhfIiD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('zMkbwdr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

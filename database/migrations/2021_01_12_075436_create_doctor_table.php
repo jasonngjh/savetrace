@@ -20,13 +20,14 @@ class CreateDoctorTable extends Migration
             $table->string('registration_number')->unique();
             $table->string('email')->nullable();
             $table->string('contact')->nullable();
-            $table->string('fax')->nullable();;
+            $table->string('fax')->nullable();
             $table->boolean('internal');
             $table->string('specialty');
             $table->text('profile_photo_path')->nullable();
             $table->text('information')->nullable();
             $table->foreignId('practice_place')->constrained('practice_places');
             $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->softDeletes();
         });
     }
 
@@ -38,6 +39,7 @@ class CreateDoctorTable extends Migration
     public function down()
     {
         Schema::table('doctors', function (Blueprint $table) {
+            $table->dropSoftDeletes();
             $table->dropForeign(['practice_place']);
             $table->dropForeign(['user_id']);
         });

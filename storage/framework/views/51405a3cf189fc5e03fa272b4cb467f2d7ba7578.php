@@ -94,7 +94,7 @@
                             </td>
                             <td class="border-dashed border-t border-gray-200">
                                 <div class="flex">
-                                    <?php if($user->roles->first()->name === 'admin'): ?>
+                                    <?php if($user->roles->first()->name === ' system admin'): ?>
                                     <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs"><?php echo e($user->roles->first()->name); ?></span>
@@ -109,7 +109,7 @@
                                         <span aria-hidden class="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs items-center"><?php echo e($user->roles->first()->name); ?></span>
                                     </span>
-                                    <?php elseif($user->roles->first()->name === 'employee'): ?>
+                                    <?php elseif($user->roles->first()->name === 'nurse'): ?>
                                     <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs items-center"><?php echo e($user->roles->first()->name); ?></span>
@@ -136,15 +136,15 @@
                                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('delete-user-button', [$user])->html();
-} elseif ($_instance->childHasBeenRendered('LrbNLtK')) {
-    $componentId = $_instance->getRenderedChildComponentId('LrbNLtK');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LrbNLtK');
+} elseif ($_instance->childHasBeenRendered('TZXb4OH')) {
+    $componentId = $_instance->getRenderedChildComponentId('TZXb4OH');
+    $componentTag = $_instance->getRenderedChildComponentTagName('TZXb4OH');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LrbNLtK');
+    $_instance->preserveRenderedChild('TZXb4OH');
 } else {
     $response = \Livewire\Livewire::mount('delete-user-button', [$user]);
     $html = $response->html();
-    $_instance->logRenderedChild('LrbNLtK', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('TZXb4OH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

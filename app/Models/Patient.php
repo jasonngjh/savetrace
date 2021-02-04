@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Patient extends Model
 {
     use HasFactory;
     use HasProfilePhoto;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +38,9 @@ class Patient extends Model
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function Patient_record()
+    {
+        return $this->hasMany(Patient_record::class, 'patient_id');
+    }
 }

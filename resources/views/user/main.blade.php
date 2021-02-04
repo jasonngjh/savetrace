@@ -66,7 +66,7 @@
                             </td>
                             <td class="border-dashed border-t border-gray-200">
                                 <div class="flex">
-                                    @if($user->roles->first()->name === 'admin')
+                                    @if($user->roles->first()->name === ' system admin')
                                     <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs">{{$user->roles->first()->name}}</span>
@@ -81,7 +81,7 @@
                                         <span aria-hidden class="absolute inset-0 bg-purple-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs items-center">{{$user->roles->first()->name}}</span>
                                     </span>
-                                    @elseif($user->roles->first()->name === 'employee')
+                                    @elseif($user->roles->first()->name === 'nurse')
                                     <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
                                         <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
                                         <span class="relative text-xs items-center">{{$user->roles->first()->name}}</span>

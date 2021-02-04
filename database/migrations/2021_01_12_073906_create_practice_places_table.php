@@ -19,7 +19,8 @@ class CreatePracticePlacesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('tel');
-            $table->text('opening_time')->nullable();;
+            $table->text('opening_time')->nullable();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,9 @@ class CreatePracticePlacesTable extends Migration
      */
     public function down()
     {
+        Schema::table('practice_places', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
         Schema::dropIfExists('practice_places');
     }
 }
