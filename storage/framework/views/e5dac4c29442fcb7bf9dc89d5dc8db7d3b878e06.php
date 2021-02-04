@@ -72,7 +72,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="bg-white shadow-lg rounded-lg w-full my-4 border-l-4 border-blue-500 text-center">
                             <h2 class="font-normal text-3xl text-gray-800 leading-tight py-4 px-8 mt-3">
-                                No Referrals
+                                No Referrals available
                             </h2>
                         </div>
                         <?php endif; ?>
