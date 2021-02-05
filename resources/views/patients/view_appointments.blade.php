@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         @empty
-                        <div class="bg-white shadow-lg rounded-lg w-full my-4 border-l-4 border-blue-500 text-center">
+                        <div class="bg-white shadow-lg rounded-lg w-full my-4 border-l-4 border-gray-500 text-center">
                             <h2 class="font-normal text-3xl text-gray-800 leading-tight py-4 px-8 mt-3">
                                 No Past Appointments
                             </h2>

@@ -145,10 +145,10 @@ class PatientController extends Controller
         }
 
         $upcoming = $appointments->partition(function ($appointment) {
-            return $appointment->date_of_appointment > now();
+            return new DateTime($appointment->date_of_appointment) > new DateTime();
         });
 
-        $output->writeln($upcoming[0]);
+        // $output->writeln($upcoming[0]);
 
         return view('patients.view_appointments', ['appointments' => $upcoming]);
     }

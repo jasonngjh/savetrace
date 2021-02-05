@@ -66,6 +66,7 @@ class AddNewDoctorForm extends Component
                 'place_of_practice_name' => ['required'],
                 'place_of_practice_address' => ['required'],
                 'place_of_practice_tel' => ['required', 'numeric'],
+                'place_of_practice_area' => ['required']
             ])->validate();
 
             $place_of_practice = PracticePlace::create([

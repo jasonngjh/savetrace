@@ -19,6 +19,7 @@ class CreatePracticePlacesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('tel');
+            $table->char('area', 1);
             $table->text('opening_time')->nullable();
             $table->softDeletes();
         });

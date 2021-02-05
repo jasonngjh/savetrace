@@ -285,15 +285,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('practice-place-select', ['wire:model' => 'state.pp_id','name' => 'practice_place','placeholder' => '','searchable' => true])->html();
-} elseif ($_instance->childHasBeenRendered('gxSBreE')) {
-    $componentId = $_instance->getRenderedChildComponentId('gxSBreE');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gxSBreE');
+} elseif ($_instance->childHasBeenRendered('cmJOLkB')) {
+    $componentId = $_instance->getRenderedChildComponentId('cmJOLkB');
+    $componentTag = $_instance->getRenderedChildComponentTagName('cmJOLkB');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gxSBreE');
+    $_instance->preserveRenderedChild('cmJOLkB');
 } else {
     $response = \Livewire\Livewire::mount('practice-place-select', ['wire:model' => 'state.pp_id','name' => 'practice_place','placeholder' => '','searchable' => true]);
     $html = $response->html();
-    $_instance->logRenderedChild('gxSBreE', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('cmJOLkB', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -373,6 +373,39 @@ echo $html;
     </div>
     <div class="mt-4">
          <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'place_of_practice_area','value' => ''.e(__('Area')).'']]); ?>
+<?php $component->withName('jet-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'place_of_practice_area','value' => ''.e(__('Area')).'']); ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+        <select id="place_of_practice_area" name="place_of_practice_area" wire:model.defer="state.place_of_practice_area" class="block mt-1 w-full form-input rounded-md shadow-sm" required>
+            <option value=''>Choose a area</option>
+            <option value='N'>North</option>
+            <option value='S'>South</option>
+            <option value='E'>East</option>
+            <option value='W'>West</option>
+        </select>
+         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.input-error','data' => ['for' => 'place_of_practice_area','class' => 'mt-2']]); ?>
+<?php $component->withName('jet-input-error'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['for' => 'place_of_practice_area','class' => 'mt-2']); ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+    </div>
+    <div class="mt-4">
+         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'place_of_practice_tel','value' => ''.e(__('Contact Number')).'']]); ?>
 <?php $component->withName('jet-label'); ?>
 <?php if ($component->shouldRender()): ?>
@@ -409,6 +442,7 @@ echo $html;
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
     </div>
+
     <div class="mt-4">
          <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
 <?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'jetstream::components.label','data' => ['for' => 'place_of_practice_opening_time','value' => ''.e(__('Opening Time')).'']]); ?>

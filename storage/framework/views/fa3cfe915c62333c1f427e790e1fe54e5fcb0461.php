@@ -84,15 +84,15 @@
                                             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id])->html();
-} elseif ($_instance->childHasBeenRendered('yoXRDWq')) {
-    $componentId = $_instance->getRenderedChildComponentId('yoXRDWq');
-    $componentTag = $_instance->getRenderedChildComponentTagName('yoXRDWq');
+} elseif ($_instance->childHasBeenRendered('SZXB4Mr')) {
+    $componentId = $_instance->getRenderedChildComponentId('SZXB4Mr');
+    $componentTag = $_instance->getRenderedChildComponentTagName('SZXB4Mr');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('yoXRDWq');
+    $_instance->preserveRenderedChild('SZXB4Mr');
 } else {
     $response = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('yoXRDWq', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('SZXB4Mr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -182,7 +182,7 @@ echo $html;
                             </div>
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                        <div class="bg-white shadow-lg rounded-lg w-full my-4 border-l-4 border-blue-500 text-center">
+                        <div class="bg-white shadow-lg rounded-lg w-full my-4 border-l-4 border-gray-500 text-center">
                             <h2 class="font-normal text-3xl text-gray-800 leading-tight py-4 px-8 mt-3">
                                 No Past Appointments
                             </h2>

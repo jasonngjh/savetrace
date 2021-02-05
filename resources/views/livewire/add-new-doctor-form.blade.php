@@ -70,10 +70,23 @@
         <x-jet-input-error for="place_of_practice_address" class="mt-2" />
     </div>
     <div class="mt-4">
+        <x-jet-label for="place_of_practice_area" value="{{ __('Area') }}" />
+        <select id="place_of_practice_area" name="place_of_practice_area" wire:model.defer="state.place_of_practice_area" class="block mt-1 w-full form-input rounded-md shadow-sm" required>
+            <option value=''>Choose a area</option>
+            <option value='C'>Central</option>
+            <option value='N'>North</option>
+            <option value='S'>South</option>
+            <option value='E'>East</option>
+            <option value='W'>West</option>
+        </select>
+        <x-jet-input-error for="place_of_practice_area" class="mt-2" />
+    </div>
+    <div class="mt-4">
         <x-jet-label for="place_of_practice_tel" value="{{ __('Contact Number') }}" />
         <x-jet-input id="place_of_practice_tel" type="text" class="block mt-1 w-full" wire:model.defer="state.place_of_practice_tel" required />
         <x-jet-input-error for="place_of_practice_tel" class="mt-2" />
     </div>
+
     <div class="mt-4">
         <x-jet-label for="place_of_practice_opening_time" value="{{ __('Opening Time') }}" />
         <textarea id="place_of_practice_opening_time" type="text" class="block mt-1 w-full form-input rounded-md shadow-sm" placeholder="Optional" wire:model.defer="state.place_of_practice_opening_time"></textarea>

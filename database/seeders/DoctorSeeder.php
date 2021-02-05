@@ -20,16 +20,18 @@ class DoctorSeeder extends Seeder
             'address' => '585 North Bridge Road, Raffles Hospital, Singapore 188770',
             'tel' => '63111111',
             'created_at' => now(),
+            'area' => 'C',
             'opening_time' => 'Mon - Fri: 8:30 a.m. - 12:30 p.m.
             1:30 p.m. - 5 p.m.
             Sat: 8:30 a.m. - 12:30 p.m.',
         ]);
 
         $practice2 = PracticePlace::create([
-            'name' => 'International Eye Cataract Retina Centre',
-            'address' => '3 Mount Elizabeth, Mount Elizabeth Medical Centre , #07-01 Singapore 228510',
+            'name' => 'Ng Teng Fong General Hospital',
+            'address' => '1 Jurong East Street 21 Singapore 609606',
             'tel' => '68872020',
             'created_at' => now(),
+            'area' => 'W',
             'opening_time' => 'Mon - Fri: 8:30 a.m. - 12:30 p.m.
             1:30 p.m. - 5 p.m.
             Sat: 8:30 a.m. - 12:30 p.m.',
