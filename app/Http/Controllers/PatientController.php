@@ -151,4 +151,9 @@ class PatientController extends Controller
     {
         return view('patients.request_appointment');
     }
+
+    public function changeAppt($id)
+    {
+        return view('patients.change_appointment', ['id' => $id]);
+    }
 }

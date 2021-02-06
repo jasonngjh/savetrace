@@ -78,21 +78,23 @@
                                     <div>
                                         <div class="flex flex-row">
                                             <?php if(!$appointment->cancelled): ?>
-                                            <div>
-                                                <button>Change</button>
+                                            <div class="px-2">
+                                                <a href="<?php echo e(route('appointments.change', ['id' => $appointment->id])); ?>" class="inline-flex items-center px-4 py-2 bg-transparent border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-blue-200 active:bg-blue-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                                    Change
+                                                </a>
                                             </div>
                                             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id])->html();
-} elseif ($_instance->childHasBeenRendered('6kK6JEV')) {
-    $componentId = $_instance->getRenderedChildComponentId('6kK6JEV');
-    $componentTag = $_instance->getRenderedChildComponentTagName('6kK6JEV');
+} elseif ($_instance->childHasBeenRendered('UQmA05z')) {
+    $componentId = $_instance->getRenderedChildComponentId('UQmA05z');
+    $componentTag = $_instance->getRenderedChildComponentTagName('UQmA05z');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('6kK6JEV');
+    $_instance->preserveRenderedChild('UQmA05z');
 } else {
     $response = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('6kK6JEV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('UQmA05z', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -200,6 +202,8 @@ echo $html;
             </div>
         </div>
     </div>
+
+
  <?php if (isset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da)): ?>
 <?php $component = $__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da; ?>
 <?php unset($__componentOriginal8e2ce59650f81721f93fef32250174d77c3531da); ?>

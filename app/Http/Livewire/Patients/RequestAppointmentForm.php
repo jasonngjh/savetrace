@@ -86,6 +86,7 @@ class RequestAppointmentForm extends Component
     public function updatedselectedDate()
     {
         $this->resetErrorBag();
+        $this->displayTime = false;
         $time = strtotime($this->selectedDate);
         $newformat = date('Y-m-d', $time);
         $data = ['selectedDate' => $newformat];

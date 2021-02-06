@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/referrals', [PatientController::class, 'viewReferrals'])->name('referrals');
         Route::get('/appointments', [PatientController::class, 'viewAppointments'])->name('appointments');
         Route::get('/appointments/new', [PatientController::class, 'newAppt'])->name('appointments.new');
+        Route::get('/appointments/change/{id}', [PatientController::class, 'changeAppt'])->name('appointments.change');
     });
 
     Route::middleware(['role:internal|external'])->group(function () {
