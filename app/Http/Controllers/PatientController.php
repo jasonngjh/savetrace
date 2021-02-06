@@ -91,7 +91,7 @@ class PatientController extends Controller
     public function search(Request $request)
     {
         // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln("in here");
+        // $output->writeln("");
 
         if ($request->filled('q')) {
             $searchParams = trim($request->get('q'));
@@ -120,8 +120,6 @@ class PatientController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-
-
         return view('patients.view_referrals', ['referrals' => $referrals]);
     }
 
@@ -131,8 +129,6 @@ class PatientController extends Controller
             ->orderByDesc('date_of_appointment')
             ->limit(20)
             ->get();
-
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
 
         foreach ($appointments as $appointment) {
             $dateTimeFormat = DateTime::createFromFormat('Y-m-d H:i:s', $appointment->date_of_appointment);
@@ -145,10 +141,8 @@ class PatientController extends Controller
         }
 
         $upcoming = $appointments->partition(function ($appointment) {
-            return new DateTime($appointment->date_of_appointment) > new DateTime();
+            return ((new DateTime($appointment->date_of_appointment) > new DateTime()) and ($appointment->cancelled == False));
         });
-
-        // $output->writeln($upcoming[0]);
 
         return view('patients.view_appointments', ['appointments' => $upcoming]);
     }

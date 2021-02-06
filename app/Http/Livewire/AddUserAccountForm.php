@@ -53,6 +53,7 @@ class AddUserAccountForm extends Component
         // $this->state['password_confirmation'] = $this->state['password'];
 
         event(new Registered($user = $creator->create($this->state)));
+
         $user->syncRoles($this->state['role']);
 
         if (array_key_exists('role_id', $this->state)) {

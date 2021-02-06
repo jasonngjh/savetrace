@@ -28,8 +28,8 @@
                 <!-- Find a doctor -->
                 <div class="flex-shrink-0 flex items-center">
                     @if(Auth::user()->roles->first()->name == "patient")
-                    <a href="{{ route('all.search') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                    <a href="{{ route('all.search') }}" class="text-grey-800 px-2 py-2 rounded-lg hover:bg-blue-100">
+                        Find A Doctor
                     </a>
                     @endif
                 </div>

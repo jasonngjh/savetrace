@@ -84,15 +84,15 @@
                                             <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id])->html();
-} elseif ($_instance->childHasBeenRendered('SZXB4Mr')) {
-    $componentId = $_instance->getRenderedChildComponentId('SZXB4Mr');
-    $componentTag = $_instance->getRenderedChildComponentTagName('SZXB4Mr');
+} elseif ($_instance->childHasBeenRendered('6kK6JEV')) {
+    $componentId = $_instance->getRenderedChildComponentId('6kK6JEV');
+    $componentTag = $_instance->getRenderedChildComponentTagName('6kK6JEV');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('SZXB4Mr');
+    $_instance->preserveRenderedChild('6kK6JEV');
 } else {
     $response = \Livewire\Livewire::mount('patients.cancel-appointment-button', [$appointment->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('SZXB4Mr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('6kK6JEV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -135,10 +135,17 @@ echo $html;
                                 <div class="py-2 flex justify-between">
                                     <div class="flex">
                                         <div>
+                                            <?php if($appointment->cancelled): ?>
+                                            <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
+                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                                <span class="relative text-xs items-center">Cancelled</span>
+                                            </span>
+                                            <?php else: ?>
                                             <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
                                                 <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
                                                 <span class="relative text-xs items-center">Passed</span>
                                             </span>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="flex-row my-auto px-3">
                                             <div class="my-auto font-bold text-grey-200">Appointment Timing</div>

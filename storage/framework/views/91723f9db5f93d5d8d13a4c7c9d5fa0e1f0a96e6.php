@@ -211,7 +211,7 @@
         <select id="role" name="role" wire:model="state.role" class="block mt-1 w-full form-input rounded-md shadow-sm">
             <option value=''>Choose a role</option>
             <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <option value=<?php echo e($role['name']); ?>><?php echo e($role['name']); ?></option>
+            <option value=<?php echo e($role['id']); ?>><?php echo e($role['name']); ?></option>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
          <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -228,9 +228,7 @@
 <?php endif; ?> 
     </div>
 
-    <?php if(array_key_exists('role', $state)): ?>
-    <?php if($state['role'] == "internal" || $state['role'] == "external"): ?>
-    <div class="flex mt-4">
+    <?php if(array_key_exists(' role', $state)): ?> <?php if($state['role']=="internal" || $state['role']=="external" ): ?> <div class="flex mt-4">
         <button wire:model="link" wire:click.prevent="toggleLink" class="background-transparent text-blue-700 ml-4">
             <?php echo e(__('Link to existing entry')); ?>
 
@@ -256,15 +254,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('doctor-select', ['wire:model' => 'state.role_id','name' => 'role_id','placeholder' => '','searchable' => true])->html();
-} elseif ($_instance->childHasBeenRendered('sYQMyVg')) {
-    $componentId = $_instance->getRenderedChildComponentId('sYQMyVg');
-    $componentTag = $_instance->getRenderedChildComponentTagName('sYQMyVg');
+} elseif ($_instance->childHasBeenRendered('MhxJv6C')) {
+    $componentId = $_instance->getRenderedChildComponentId('MhxJv6C');
+    $componentTag = $_instance->getRenderedChildComponentTagName('MhxJv6C');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('sYQMyVg');
+    $_instance->preserveRenderedChild('MhxJv6C');
 } else {
     $response = \Livewire\Livewire::mount('doctor-select', ['wire:model' => 'state.role_id','name' => 'role_id','placeholder' => '','searchable' => true]);
     $html = $response->html();
-    $_instance->logRenderedChild('sYQMyVg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('MhxJv6C', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

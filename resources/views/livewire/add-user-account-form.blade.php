@@ -35,15 +35,13 @@
         <select id="role" name="role" wire:model="state.role" class="block mt-1 w-full form-input rounded-md shadow-sm">
             <option value=''>Choose a role</option>
             @foreach($roles as $role)
-            <option value={{ $role['name'] }}>{{ $role['name']}}</option>
+            <option value={{ $role['id'] }}>{{ $role['name']}}</option>
             @endforeach
         </select>
         <x-jet-input-error for="role" class="mt-2" />
     </div>
 
-    @if(array_key_exists('role', $state))
-    @if($state['role'] == "internal" || $state['role'] == "external")
-    <div class="flex mt-4">
+    @if(array_key_exists(' role', $state)) @if($state['role']=="internal" || $state['role']=="external" ) <div class="flex mt-4">
         <button wire:model="link" wire:click.prevent="toggleLink" class="background-transparent text-blue-700 ml-4">
             {{ __('Link to existing entry') }}
         </button>

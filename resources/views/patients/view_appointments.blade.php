@@ -113,10 +113,17 @@
                                 <div class="py-2 flex justify-between">
                                     <div class="flex">
                                         <div>
+                                            @if($appointment->cancelled)
+                                            <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
+                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                                <span class="relative text-xs items-center">Cancelled</span>
+                                            </span>
+                                            @else
                                             <span class="relative inline-block px-3 py-1 font-semibold items-center text-gray-900 leading-tight">
                                                 <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
                                                 <span class="relative text-xs items-center">Passed</span>
                                             </span>
+                                            @endif
                                         </div>
                                         <div class="flex-row my-auto px-3">
                                             <div class="my-auto font-bold text-grey-200">Appointment Timing</div>
