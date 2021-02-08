@@ -11,11 +11,6 @@
         @auth
         @if(Auth::user()->hasRole(['internal','external','nurse']))
         @livewire('doctor-referrals-tabs', ['doctor_id' => $id])
-        @if(Auth::user()->role_id == $id)
-        <h2>im this person</h2>
-        @else
-        <h2>im not this person</h2>
-        @endif
         @else
         <div>
             @livewire('doctor-information-component',['doctor_id' => $id])

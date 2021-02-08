@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Patients;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Storage;
 
 class Homepage extends Component
 {
@@ -21,6 +22,7 @@ class Homepage extends Component
     {
         $output = new \Symfony\Component\Console\Output\ConsoleOutput();
         $output->writeln($record_path);
+        return Storage::download('public/' . $record_path);
     }
 
     public function render()

@@ -21,10 +21,9 @@
 
         <x-jet-section-border />
 
-
-        @if(empty($patients))
-        <div>TODO: empty patient page</div>
-        @else
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Recent Patients') }}
+        </h2>
         <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative max-h-full">
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
                 <thead>
@@ -37,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($patients as $patient)
+                    @forelse($patients as $patient)
                     <tr>
                         <td class="border-dashed border-t border-gray-200 ">
                             <span class="text-gray-700 px-6 py-3 flex items-center">{{$patient->id}}</span>
@@ -53,19 +52,24 @@
                         </td>
                         <td class="border-dashed border-t border-gray-200">
                             <div class="flex">
-                                <form method="GET" action="{{ route('users.edit') }}">
-                                    <input name="userId" value="{{ $patient->id }}" type="hidden">
+                                <form method="GET" action="{{ route('patients.view')}}">
+                                    <input id="patient_id" name="patient_id" value="{{ $patient->id }}" type="hidden">
                                     <button class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                                            <title>View User</title>
-                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                        </svg>
+                                        <button class="bg-transparent text-xs text-green-500 italic hover:underline hover:text-green-600 font-medium">
+                                            View User
+                                        </button>
                                     </button>
                                 </form>
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td class="text-center">
+                            <h2 class="text-grey-800 py-2 px-2">No available patient!</h2>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
 
@@ -73,7 +77,6 @@
                 {{ $patients->links()}}
             </div>
         </div>
-        @endif
 
     </div>
 </x-app-layout>

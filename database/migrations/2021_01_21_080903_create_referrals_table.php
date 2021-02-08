@@ -19,7 +19,7 @@ class CreateReferralsTable extends Migration
             $table->foreignId('patient_id')->constrained('patients');
             $table->foreignId('from_doctor_id')->constrained('doctors');
             $table->foreignId('to_doctor_id')->constrained('doctors');
-            $table->date('visited_on')->nullable();
+            $table->timestamp('visited_on', $precision = 0)->nullable();
             $table->boolean('viewed')->default(false);
             $table->text('file_path')->nullable();
         });

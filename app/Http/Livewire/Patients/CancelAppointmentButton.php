@@ -47,13 +47,7 @@ class CancelAppointmentButton extends Component
             ]);
         }
 
-        DB::transaction(function () {
-            $appt = Appointment::find($this->appt_id);
-            $appt->cancelled = true;
-            $appt->save();
-        });
-
-        return redirect()->route('appointments');
+        return redirect()->route('appointments.delete', ['id' => $this->appt_id]);
     }
 
     public function confirmCancelAppointment()

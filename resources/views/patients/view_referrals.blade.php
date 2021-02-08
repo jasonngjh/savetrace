@@ -57,6 +57,10 @@
                                 <div class="flex justify-between">
                                     <div class="my-auto">
                                         @if($referral->file_path)
+                                        <form method="GET" action="{{ route('referrals.download') }}">
+                                            <input hidden id="id" name="id" value="{{ $referral->id }}" />
+                                            <button type="submit">Download</button>
+                                        </form>
                                         @else
                                         <p class=" text-gray-500 text-base">No File</p>
                                         @endif

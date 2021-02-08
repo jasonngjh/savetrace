@@ -87,4 +87,8 @@ class DoctorController extends Controller
     {
         return view('doctors.view', ['id' => $id]);
     }
+
+    public function addReferral($from_doctor = '', $to_doctor)
+    {
+    }
 }

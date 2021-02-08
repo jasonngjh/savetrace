@@ -23,6 +23,11 @@ class Referral extends Model
         'file_path',
     ];
 
+    public function Patient()
+    {
+        return $this->hasOne(Patient::class, 'id', 'patient_id');
+    }
+
     public function From_doctor()
     {
         return $this->hasOne(Doctor::class, 'id', 'from_doctor_id')->withTrashed();

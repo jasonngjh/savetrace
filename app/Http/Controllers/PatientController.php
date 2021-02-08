@@ -9,6 +9,8 @@ use App\Models\Patient;
 use App\Models\Referral;
 use App\Models\Appointment;
 use DateTime;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PatientController extends Controller
 {
@@ -19,7 +21,32 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return view('patients.index');
+        $doctorPatientAppointment = Appointment::select('patient_id')
+            ->where('doctor_id', '=', Auth::user()->role_id)
+            ->groupBy('patient_id')
+            ->get();
+
+        $doctorPatientReferral = Referral::select('patient_id')
+            ->where('from_doctor_id', '=', Auth::user()->role_id)
+            ->groupBy('patient_id')
+            ->get();
+
+        $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+
+        $data = Patient::whereIn('id', $doctorPatient)->paginate(15);
+
+        foreach ($data as $patient) {
+            $today = date('Y-m-d');
+            $diff = (date_diff(date_create($patient->date_of_birth), date_create($today)))->format('%d');;
+            $patient->age = $diff;
+        }
+
+        return view('patients.index', ['patients' => $data]);
+    }
+
+    public function viewPatient(Request $request)
+    {
+        return view('patients.view_profile', ['patient_id' => $request->get('patient_id')]);
     }
 
     /**
@@ -83,9 +110,15 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        DB::transaction(function () use ($id) {
+            $appt = Appointment::find($id);
+            $appt->cancelled = true;
+            $appt->save();
+        });
+
+        return redirect()->route('appointments');
     }
 
     public function search(Request $request)
@@ -96,11 +129,23 @@ class PatientController extends Controller
         if ($request->filled('q')) {
             $searchParams = trim($request->get('q'));
 
+            $doctorPatientAppointment = Appointment::select('patient_id')
+                ->where('doctor_id', '=', Auth::user()->role_id)
+                ->groupBy('patient_id')
+                ->get();
 
-            $data = Patient::where(function ($query) use ($searchParams) {
-                $query->where('name', 'like', "%{$searchParams}%")
-                    ->orWhere('contact_number', 'like', "%{$searchParams}%");
-            })->paginate(15);
+            $doctorPatientReferral = Referral::select('patient_id')
+                ->where('from_doctor_id', '=', Auth::user()->role_id)
+                ->groupBy('patient_id')
+                ->get();
+
+            $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+
+            $data = Patient::whereIn('id', $doctorPatient)
+                ->where(function ($query) use ($searchParams) {
+                    $query->where('name', 'like', "%{$searchParams}%")
+                        ->orWhere('contact_number', 'like', "%{$searchParams}%");
+                })->paginate(15);
 
             foreach ($data as $patient) {
                 $today = date('Y-m-d');
@@ -145,6 +190,15 @@ class PatientController extends Controller
         });
 
         return view('patients.view_appointments', ['appointments' => $upcoming]);
+    }
+
+    public function downloadReferral(Request $request)
+    {
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $output->writeln($request->get('id'));
+
+        $referral = Referral::find($request->get('id'));
+        return Storage::download('public/' . $referral->file_path);
     }
 
     public function newAppt()
