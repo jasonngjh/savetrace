@@ -122,7 +122,9 @@
 
             <div class="mt-4">
                 <x-jet-label for="address" value="{{ __('Address') }}" />
-                <textarea id="address" name="address" type="text" class="block mt-1 w-full form-input rounded-md shadow-sm" :value="old('address')" required></textarea>
+                <textarea id="address" name="address" type="text" class="block mt-1 w-full form-input rounded-md shadow-sm" required>
+                {{ old('address') }}
+                </textarea>
             </div>
 
             <div class="flex items-center justify-end mt-4">

@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\PracticePlace;
+use App\Models\Referral;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -88,7 +94,30 @@ class DoctorController extends Controller
         return view('doctors.view', ['id' => $id]);
     }
 
-    public function addReferral($from_doctor = '', $to_doctor)
+    public function addReferral($to_doctor)
     {
+        return view('doctors.add_referral', ['to_doctor' => $to_doctor]);
+    }
+
+    public function addReferralPost(Request $request)
+    {
+        Validator::make($request->all(), [
+            'file' => ['mimes:pdf', 'required'],
+        ])->validate();
+
+        $encryptedReferral = Crypt::encrypt(file_get_contents($request->file('file')->getRealPath()));
+        $filePath = "/public/referrals/" . time() . Auth::user()->role_id . $request->get('doctor_id');
+
+        Storage::put($filePath, $encryptedReferral);
+
+        Referral::create([
+            'created_at' => now(),
+            'patient_id' => $request->get('patient'),
+            'from_doctor_id' => Auth::user()->role_id,
+            'to_doctor_id' => $request->get('doctor_id'),
+            'file_path' => $request->file('file') ? $filePath : '',
+        ]);
+
+        return redirect()->route('doctors.view', ['id' => $request->get('doctor_id')]);
     }
 }

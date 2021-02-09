@@ -22,7 +22,7 @@
                     <div class="flex justify-between">
                         <div class="my-auto">
                             @if($record->file_path)
-                            <x-jet-button wire:click="downRecord( '{{$record->file_path}}' )" class="ml-4 hover:text-blue-700 bg-transparent">Download Record</x-jet-button>
+                            <x-jet-button wire:click="downRecord( '{{$record->id}}' )" class="ml-4 hover:text-blue-700 bg-transparent">Download Record</x-jet-button>
                             @else
                             <p class=" text-gray-500 text-base">No File</p>
                             @endif

@@ -1,4 +1,11 @@
 <div class="px-4">
+    <div class="flex justify-end py-2 px-4">
+        @if((Auth::user()->hasRole(['internal|external'])) and (Auth::user()->role_id != $doctor_id))
+        <a href="{{ route('referral.add', ['id' => $doctor_id]) }}" class="inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            Send A Referral
+        </a>
+        @endif
+    </div>
     <div class="w-full flex sm:border-b sm:border-gray-300 relative flex-col sm:flex-row">
         <button class="flex-1 sm:text-center font-bold pb-3 cursor-pointer hover:text-blue-400 false tablink active '" onclick="openPage('sentReferral', this)" id="defaultOpen">
             <div class="font-bold text-gray-800 hover:text-blue-400 bg-white rounded-lg mx-1 py-3">
@@ -14,11 +21,6 @@
         </button>
 
     </div>
-    <div class="flex justify-end py-4 px-4">
-        <a href="{{ route('appointments.new') }}" class="inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-            Request For Appointment
-        </a>
-    </div>
 
     <div id="sentReferral" class="tabcontent pt-2">
         <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative max-h-full">
@@ -27,7 +29,7 @@
                     <tr class="text-left">
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">ID</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Patient</th>
-                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent To</th>
+                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent By</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Place of Practice</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent On</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Visited On</th>
@@ -89,7 +91,7 @@
                     <tr class="text-left">
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">ID</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Patient</th>
-                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Referred To</th>
+                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Referred From</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Place of Practice</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Received On</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Visited On</th>

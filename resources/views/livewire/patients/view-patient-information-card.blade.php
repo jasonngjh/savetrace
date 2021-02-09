@@ -12,7 +12,7 @@
                                 {{$patient->name}}
                             </h2>
                             <div>
-                                <h2 class="font-bold text-xl text-gray-800 leading-tight">
+                                <h2 class="font-normal text-xl text-gray-800 leading-tight">
                                     {{$patient->age}} years old
                                 </h2>
                             </div>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col py-6">
+                    <div class="flex flex-col py-6 px-6">
                         <h2 class="font-normal text-xl text-gray-800 leading-tight">
                             Emergency Contact
                         </h2>

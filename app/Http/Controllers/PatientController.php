@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Patient;
 use App\Models\Referral;
 use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient_record;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
@@ -21,19 +25,30 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $doctorPatientAppointment = Appointment::select('patient_id')
-            ->where('doctor_id', '=', Auth::user()->role_id)
-            ->groupBy('patient_id')
-            ->get();
+        $data = DB::transaction(function () {
+            $practice_place = Doctor::find(Auth::user()->role_id, ['practice_place']);
 
-        $doctorPatientReferral = Referral::select('patient_id')
-            ->where('from_doctor_id', '=', Auth::user()->role_id)
-            ->groupBy('patient_id')
-            ->get();
+            $doctorsUnderSamePlace = Doctor::select('id')
+                ->where('practice_place', '=', $practice_place->practice_place)
+                ->groupBy('id')
+                ->get();
 
-        $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+            $doctorPatientAppointment = Appointment::select('patient_id')
+                ->whereIn('doctor_id', $doctorsUnderSamePlace)
+                ->orWhere('doctor_id', '=', Auth::user()->role_id)
+                ->groupBy('patient_id')
+                ->get();
 
-        $data = Patient::whereIn('id', $doctorPatient)->paginate(15);
+            $doctorPatientReferral = Referral::select('patient_id')
+                ->whereIn('from_doctor_id', $doctorsUnderSamePlace)
+                ->orWhere('from_doctor_id', '=', Auth::user()->role_id)
+                ->orWhere('to_doctor_id', '=', Auth::user()->role_id)
+                ->groupBy('patient_id')
+                ->get();
+
+            $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+            return Patient::whereIn('id', $doctorPatient)->paginate(15);
+        });
 
         foreach ($data as $patient) {
             $today = date('Y-m-d');
@@ -47,61 +62,6 @@ class PatientController extends Controller
     public function viewPatient(Request $request)
     {
         return view('patients.view_profile', ['patient_id' => $request->get('patient_id')]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -129,23 +89,36 @@ class PatientController extends Controller
         if ($request->filled('q')) {
             $searchParams = trim($request->get('q'));
 
-            $doctorPatientAppointment = Appointment::select('patient_id')
-                ->where('doctor_id', '=', Auth::user()->role_id)
-                ->groupBy('patient_id')
-                ->get();
+            $data = DB::transaction(function () use ($searchParams) {
+                $practice_place = Doctor::find(Auth::user()->role_id, ['practice_place']);
 
-            $doctorPatientReferral = Referral::select('patient_id')
-                ->where('from_doctor_id', '=', Auth::user()->role_id)
-                ->groupBy('patient_id')
-                ->get();
+                $doctorsUnderSamePlace = Doctor::select('id')
+                    ->where('practice_place', '=', $practice_place->practice_place)
+                    ->groupBy('id')
+                    ->get();
 
-            $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+                $doctorPatientAppointment = Appointment::select('patient_id')
+                    ->whereIn('doctor_id', $doctorsUnderSamePlace)
+                    ->orWhere('doctor_id', '=', Auth::user()->role_id)
+                    ->groupBy('patient_id')
+                    ->get();
 
-            $data = Patient::whereIn('id', $doctorPatient)
-                ->where(function ($query) use ($searchParams) {
-                    $query->where('name', 'like', "%{$searchParams}%")
-                        ->orWhere('contact_number', 'like', "%{$searchParams}%");
-                })->paginate(15);
+                $doctorPatientReferral = Referral::select('patient_id')
+                    ->whereIn('from_doctor_id', $doctorsUnderSamePlace)
+                    ->orWhere('from_doctor_id', '=', Auth::user()->role_id)
+                    ->orWhere('to_doctor_id', '=', Auth::user()->role_id)
+                    ->groupBy('patient_id')
+                    ->get();
+
+                $doctorPatient = $doctorPatientAppointment->union($doctorPatientReferral);
+
+
+                return Patient::whereIn('id', $doctorPatient)
+                    ->where(function ($query) use ($searchParams) {
+                        $query->where('name', 'like', "%{$searchParams}%")
+                            ->orWhere('contact_number', 'like', "%{$searchParams}%");
+                    })->paginate(15);
+            });
 
             foreach ($data as $patient) {
                 $today = date('Y-m-d');
@@ -194,11 +167,17 @@ class PatientController extends Controller
 
     public function downloadReferral(Request $request)
     {
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $output->writeln($request->get('id'));
-
         $referral = Referral::find($request->get('id'));
-        return Storage::download('public/' . $referral->file_path);
+
+        $encryptedContents = Storage::get($referral->file_path);
+        $decryptedContents = Crypt::decrypt($encryptedContents);
+
+        $getDate = (new DateTime($referral->created_at))->format('YmdHis');
+        $file_name = "{$getDate}{$referral->from_doctor_id}{$referral->to_doctor_id}_referral.pdf";
+
+        return response()->streamDownload(function () use ($decryptedContents) {
+            echo $decryptedContents;
+        }, $file_name);
     }
 
     public function newAppt()
@@ -209,5 +188,51 @@ class PatientController extends Controller
     public function changeAppt($id)
     {
         return view('patients.change_appointment', ['id' => $id]);
+    }
+
+    public function addPatientRecord(Request $request)
+    {
+        $patient = Patient::find($request->get('patient_id'), ['id', 'name']);
+        return view('patients.add_medical_record', ['patient' => $patient]);
+    }
+
+    public function addPatientRecordPost(Request $request)
+    {
+        Validator::make($request->all(), [
+            'name_of_record' => ['required', 'string', 'max:255'],
+            'file' => ['mimes:pdf', 'required'],
+        ])->validate();
+
+        $encryptedRecord = Crypt::encrypt(file_get_contents($request->file('file')->getRealPath()));
+        $filePath = "/public/records/" . time() . Auth::user()->role_id . $request->get('patient_id');
+
+        Storage::put($filePath, $encryptedRecord);
+
+        Patient_record::create([
+            'created_at' => now(),
+            'patient_id' => $request->get('patient_id'),
+            'doctor_id' => Auth::user()->role_id,
+            'name_of_record' => $request->get('name_of_record'),
+            'information' => $request->get('information'),
+            'file_path' => $request->file('file') ? $filePath : '',
+        ]);
+
+        return redirect()->route('patients.view', ['patient_id' => $request->get('patient_id')]);
+    }
+
+    public function downRecord($record_id)
+    {
+        $patient_record = Patient_record::find($record_id);
+
+        $encryptedContents = Storage::get($patient_record->file_path);
+        $decryptedContents = Crypt::decrypt($encryptedContents);
+
+        $getDate = (new DateTime($patient_record->created_at))->format('YmdHis');
+        $basicfile = str_replace(' ', '', $patient_record->name_of_record);
+        $file_name = "{$getDate}{$patient_record->doctor_id}{$patient_record->patient_id}_{$basicfile}.pdf";
+
+        return response()->streamDownload(function () use ($decryptedContents) {
+            echo $decryptedContents;
+        }, $file_name);
     }
 }
