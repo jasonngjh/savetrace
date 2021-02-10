@@ -29,7 +29,7 @@
                     <tr class="text-left">
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">ID</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Patient</th>
-                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent By</th>
+                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent To</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Place of Practice</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Sent On</th>
                         <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider">Visited On</th>
@@ -65,8 +65,14 @@
                                 </span>
                             </td>
                             <td class="border-dashed border-t border-gray-200">
-                                <div class="flex">
-
+                                <div class="flex justify-center">
+                                    @if(($referral->to_doctor_id == Auth::user()->role_id) || ($referral->from_doctor_id == Auth::user()->role_id))
+                                    <button wire:click="downloadReferral( {{ $referral->id }})" class="flex hover:text-green-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 py-auto">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -131,8 +137,14 @@
                                 </span>
                             </td>
                             <td class="border-dashed border-t border-gray-200">
-                                <div class="flex">
-
+                                <div class="flex justify-center">
+                                    @if(($referral->to_doctor_id == Auth::user()->role_id) || ($referral->from_doctor_id == Auth::user()->role_id))
+                                    <button wire:click.prevent="downloadReferral( {{ $referral->id }})" class="flex hover:text-green-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 py-auto">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

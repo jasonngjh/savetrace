@@ -25,6 +25,8 @@ Route::get('/search-all-doctors', function () {
 })->name('all.search');
 
 Route::get('/doctors/profile/{id}', [DoctorController::class, 'view'])->name('doctors.view');
+Route::get('send-referral', 'DoctorController@enqueue');
+
 
 Route::middleware(['auth'])->get('/dashboard', function () {
     return redirect('home');

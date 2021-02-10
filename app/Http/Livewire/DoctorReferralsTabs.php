@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Doctor;
 use App\Models\Referral;
 use \DateTime;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class DoctorReferralsTabs extends Component
 {
@@ -34,6 +36,21 @@ class DoctorReferralsTabs extends Component
         $referral->save();
 
         return redirect()->route('doctors.view', ['id' => $this->doctor_id]);
+    }
+
+    public function downloadReferral($referral_id)
+    {
+        $referral = Referral::find($referral_id);
+
+        $encryptedContents = Storage::get($referral->file_path);
+        $decryptedContents = Crypt::decrypt($encryptedContents);
+
+        $getDate = (new DateTime($referral->created_at))->format('YmdHis');
+        $file_name = "{$getDate}{$referral->from_doctor_id}{$referral->to_doctor_id}_referral.pdf";
+
+        return response()->streamDownload(function () use ($decryptedContents) {
+            echo $decryptedContents;
+        }, $file_name);
     }
 
     public function render()

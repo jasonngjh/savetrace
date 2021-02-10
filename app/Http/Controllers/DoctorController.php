@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmail;
 
 class DoctorController extends Controller
 {
@@ -110,7 +111,7 @@ class DoctorController extends Controller
 
         Storage::put($filePath, $encryptedReferral);
 
-        Referral::create([
+        $referral = Referral::create([
             'created_at' => now(),
             'patient_id' => $request->get('patient'),
             'from_doctor_id' => Auth::user()->role_id,
@@ -118,6 +119,16 @@ class DoctorController extends Controller
             'file_path' => $request->file('file') ? $filePath : '',
         ]);
 
+        //$this->enqueue($referral);
+
         return redirect()->route('doctors.view', ['id' => $request->get('doctor_id')]);
+    }
+
+    public function enqueue($referral)
+    {
+        $to_doctor_email = $referral->To_Doctor->email;
+
+        $details = ['receipient' => $to_doctor_email, 'type' => 'referral', 'id' => $referral->id];
+        SendEmail::dispatch($details);
     }
 }
