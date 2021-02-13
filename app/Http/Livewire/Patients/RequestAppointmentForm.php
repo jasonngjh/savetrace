@@ -55,9 +55,6 @@ class RequestAppointmentForm extends Component
         $this->displayArea = false;
         $this->displayDoctor = false;
 
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln($area);
-
         $this->listOfPlaceInArea = PracticePlace::select('id', 'name')
             ->where('area', '=', $area)
             ->get();

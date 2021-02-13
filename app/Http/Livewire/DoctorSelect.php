@@ -11,6 +11,7 @@ class DoctorSelect extends LivewireSelect
     public function options($searchTerm = null): Collection
     {
         $doctors = Doctor::select('id as value', 'name as description')
+            ->where('user_id', '=', null)
             ->get();
         return $doctors;
     }
