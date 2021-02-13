@@ -73,20 +73,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/appointments/delete/{id}', [PatientController::class, 'delete'])->name('appointments.delete');
     });
 
-    Route::middleware(['role:nurse'])->group(function () {
-        Route::get('/doctors', [DoctorController::class, 'retrieve_all_doctors'])->name('doctors');
-        Route::get('/doctors/search', [PatientController::class, 'search'])->name('doctors.search');
-    });
-
-    Route::middleware(['role:internal|external'])->group(function () {
+    Route::middleware(['role:internal|external|nurse'])->group(function () {
         Route::get('/patients', [PatientController::class, 'index'])->name('patients');
         Route::get('/patients/view', [PatientController::class, 'viewPatient'])->name('patients.view');
         Route::get('/patients/search', [PatientController::class, 'search'])->name('patients.search');
         Route::get('/patients/new/record', [PatientController::class, 'addPatientRecord'])->name('patients.add.record');
         Route::post('/patients/new/record', [PatientController::class, 'addPatientRecordPost'])->name('patients.add.record.post');
         Route::get('/patients/download/record/{id}', [PatientController::class, 'downRecord'])->name('patients.download.record');
-
-
 
         Route::get('/doctors', [DoctorController::class, 'retrieve_all_doctors'])->name('doctors');
         Route::get('/doctors/search', [PatientController::class, 'search'])->name('doctors.search');

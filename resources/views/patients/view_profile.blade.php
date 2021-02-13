@@ -15,6 +15,8 @@
                 Add
             </a>
         </div>
+        @endhasanyrole
+        @hasanyrole('internal|external|nurse')
         @livewire('patient.patient-record-list', ['patient_id' => $patient_id])
         @endhasanyrole
         @endauth

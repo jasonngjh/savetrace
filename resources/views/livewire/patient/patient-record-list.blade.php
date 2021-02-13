@@ -28,8 +28,8 @@
                             <td class="border-dashed border-t border-gray-200">
                                 <span class="text-gray-700 px-6 py-3 flex items-center">{{$record->Doctor()->first()->PracticePlace()->first()->name}}</span>
                             </td>
-                            <td class="border-dashed border-t border-gray-200">
-                                <span class="text-gray-700 px-8 py-3 flex">{{$record->information}}</span>
+                            <td class="border-dashed border-t border-gray-200 px-8 py-3">
+                                <p class="text-gray-700 whitespace-pre-wrap">{{$record->information}}</p>
                             </td>
                             <td class="border-dashed border-t border-gray-200">
                                 <span class="text-gray-700 px-4 py-3 flex items-center">{{$record->created_at}}</span>
