@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use DateInterval;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\SendEmail;
 
 class ChangeAppointmentForm extends Component
 {
@@ -77,11 +78,22 @@ class ChangeAppointmentForm extends Component
             $this->appt->save();
         });
 
+        //send email to notify patient
+        $date = $date->format('l d M Y H:i');
+        $message = 'You have change the appointment date and time to ' . $date;
+        $details = ['receipient' => $this->appt->Patient->User->email, 'receipient_name' => $this->appt->Patient->User->name, 'subject' => 'Appointment Changed!', 'type' => 'patient_notif', 'message' => $message];
+        $this->enqueue($details);
+
         return redirect()->route('appointments');
     }
 
     public function render()
     {
         return view('livewire.patients.change-appointment-form');
+    }
+
+    public function enqueue($details)
+    {
+        SendEmail::dispatch($details);
     }
 }

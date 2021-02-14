@@ -11,7 +11,7 @@ class SendPatientNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $details;
+    public $details;
     /**
      * Create a new message instance.
      *
@@ -30,7 +30,7 @@ class SendPatientNotification extends Mailable
     public function build()
     {
         return $this->from('noreply@savetrace.com', 'SaveTrace')
-            ->subject('!')
-            ->view('view.name');
+            ->subject($this->details['subject'])
+            ->view('mails.sent_patient_notif');
     }
 }

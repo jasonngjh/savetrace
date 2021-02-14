@@ -15,16 +15,16 @@ class SendReferral extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $referral;
+    public $details;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($referral_id)
+    public function __construct($details)
     {
-        $this->referral = Referral::find($referral_id);
+        $this->details = $details;
     }
 
     /**
@@ -35,7 +35,7 @@ class SendReferral extends Mailable
     public function build()
     {
         return $this->from('noreply@savetrace.com', 'SaveTrace')
-            ->subject('New Referral!')
+            ->subject($this->details['subject'])
             ->view('mails.sent_referral');
     }
 }

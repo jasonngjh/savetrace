@@ -119,16 +119,21 @@ class DoctorController extends Controller
             'file_path' => $request->file('file') ? $filePath : '',
         ]);
 
-        //$this->enqueue($referral);
+        $this->enqueue($referral);
 
         return redirect()->route('doctors.view', ['id' => $request->get('doctor_id')]);
     }
 
     public function enqueue($referral)
     {
-        $to_doctor_email = $referral->To_Doctor->email;
+        $details = ['receipient' => $referral->To_Doctor->email, 'receipient_name' => 'Dr. ' . $referral->To_Doctor->name, 'subject' => 'Received new referral', 'type' => 'referral', 'id' => $referral->id, 'message' => 'You have received a new referral. Please log in to SaveTrace to view the referral'];
+        SendEmail::dispatch($details);
 
-        $details = ['receipient' => $to_doctor_email, 'type' => 'referral', 'id' => $referral->id];
+        $details = ['receipient' => $referral->Patient->User->email, 'receipient_name' => $referral->Patient->name, 'subject' => 'Received new referral', 'type' => 'referral', 'id' => $referral->id, 'message' => 'You have received a new referral. Please log in to SaveTrace to view the referral'];
+        SendEmail::dispatch($details);
+
+        $message = 'You have successfully sent a new referral to Dr. ' . $referral->To_Doctor->name . ' on ' . $referral->created_at;
+        $details = ['receipient' => $referral->From_doctor->email, 'receipient_name' => 'Dr. ' . $referral->From_doctor->name, 'subject' => 'Successfully sent referral', 'type' => 'referral', 'id' => $referral->id, 'message' => $message];
         SendEmail::dispatch($details);
     }
 }

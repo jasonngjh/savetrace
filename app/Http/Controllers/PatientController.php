@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use App\Jobs\SendEmail;
 
 class PatientController extends Controller
 {
@@ -72,11 +73,20 @@ class PatientController extends Controller
      */
     public function delete($id)
     {
+        //send email to notify patient
+        $appt = Appointment::find($id);
+        $date = (new DateTime($appt->date_of_appointment))->format('l d M Y H:i');
+        $message = 'You have cancelled appointment for ' . $date;
+        $details = ['receipient' => $appt->Patient->User->email, 'receipient_name' => $appt->Patient->User->name, 'subject' => 'Appointment Cancelled!', 'type' => 'patient_notif', 'message' => $message];
+
         DB::transaction(function () use ($id) {
             $appt = Appointment::find($id);
             $appt->cancelled = true;
             $appt->save();
         });
+
+        //send email to notify patient
+        $this->enqueue($details);
 
         return redirect()->route('appointments');
     }
@@ -208,7 +218,7 @@ class PatientController extends Controller
 
         Storage::put($filePath, $encryptedRecord);
 
-        Patient_record::create([
+        $pr = Patient_record::create([
             'created_at' => now(),
             'patient_id' => $request->get('patient_id'),
             'doctor_id' => Auth::user()->role_id,
@@ -216,6 +226,12 @@ class PatientController extends Controller
             'information' => $request->get('information'),
             'file_path' => $request->file('file') ? $filePath : '',
         ]);
+
+        //send email to notify patient
+        $message = 'Dr. ' . $pr->Doctor->name . ' has added a new medical record into your profle. Log in to SaveTrace to view/download!';
+        $patient = Patient::find($request->get('patient_id'));
+        $details = ['receipient' => $patient->User->email, 'receipient_name' => $patient->User->name, 'subject' => 'New Medical Record Added!', 'type' => 'patient_notif', 'message' => $message];
+        $this->enqueue($details);
 
         return redirect()->route('patients.view', ['patient_id' => $request->get('patient_id')]);
     }
@@ -234,5 +250,10 @@ class PatientController extends Controller
         return response()->streamDownload(function () use ($decryptedContents) {
             echo $decryptedContents;
         }, $file_name);
+    }
+
+    public function enqueue($details)
+    {
+        SendEmail::dispatch($details);
     }
 }

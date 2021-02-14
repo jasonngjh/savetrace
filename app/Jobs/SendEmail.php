@@ -37,7 +37,7 @@ class SendEmail implements ShouldQueue
     {
         //logic to send what email
         if ($this->details['type'] === 'referral') {
-            $email = new SendReferral($this->details['id']);
+            $email = new SendReferral($this->details);
         } else {
             $email = new SendPatientNotification($this->details);
         }

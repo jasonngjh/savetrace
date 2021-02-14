@@ -7,9 +7,9 @@ use App\Models\Appointment;
 use App\Models\PracticePlace;
 use App\Models\Doctor;
 use DateInterval;
-use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmail;
 
 class RequestAppointmentForm extends Component
 {
@@ -115,11 +115,21 @@ class RequestAppointmentForm extends Component
             'date_of_appointment' => (new \DateTime($this->selectedDate . $this->selectedTime))->format('Y-m-d H:i:s'),
         ]);
 
+        $date = (new \DateTime($this->selectedDate . $this->selectedTime))->format('l d M Y H:i');
+        $message = 'You have requested an appointment for ' . $date . ' with Dr. ' . $this->selectedDoctor->first()->name;
+        $details = ['receipient' => Auth::user()->email, 'receipient_name' => Auth::user()->name, 'subject' => 'Appointment Requested!', 'type' => 'patient_notif', 'message' => $message];
+        $this->enqueue($details);
+
         return redirect()->route('appointments');
     }
 
     public function render()
     {
         return view('livewire.patients.request-appointment-form');
+    }
+
+    public function enqueue($details)
+    {
+        SendEmail::dispatch($details);
     }
 }

@@ -7,7 +7,7 @@
 <a href="/">
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="-0.9999999999999929 -1 119.83116883116887 44.00000000000001" width="w-16" height="w-16">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="-0.9999999999999929 -1 119.83116883116887 44.00000000000001" width="340px" height="140px">
         <defs>
             <path d="M27.98 8.62C27.98 9.57 27.42 10.35 26.72 10.35C26.03 10.35 25.46 9.57 25.46 8.62C25.46 7.67 26.03 6.89 26.72 6.89C27.42 6.89 27.98 7.67 27.98 8.62Z" id="a2NnNI6ws"></path>
             <path d="M22.54 3.06C22.54 4.01 21.98 4.79 21.28 4.79C20.59 4.79 20.02 4.01 20.02 3.06C20.02 2.11 20.59 1.33 21.28 1.33C21.98 1.33 22.54 2.11 22.54 3.06Z" id="dCGdmBPKq"></path>

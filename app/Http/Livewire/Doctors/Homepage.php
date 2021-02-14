@@ -9,6 +9,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use App\Jobs\SendEmail;
 
 class Homepage extends Component
 {
@@ -50,6 +51,12 @@ class Homepage extends Component
         $appt->doctor_confirmation = True;
         $appt->save();
 
+        //send email to notify patient
+        $date = (new DateTime($appt->date_of_appointment))->format('l d M Y H:i');
+        $message = 'Dr. ' . $appt->Doctor->name . ' has accepted your appointment on ' . $date;
+        $details = ['receipient' => $appt->Patient->User->email, 'receipient_name' => $appt->Patient->User->name, 'subject' => 'Appointment Accepted!', 'type' => 'patient_notif', 'message' => $message];
+        $this->enqueue($details);
+
         $this->mount();
         return redirect()->route('home');
     }
@@ -59,6 +66,12 @@ class Homepage extends Component
         $appt = Appointment::find($appt_id);
         $appt->cancelled = False;
         $appt->save();
+
+        //send email to notify patient
+        $date = (new DateTime($appt->date_of_appointment))->format('l d M Y H:i');
+        $message = 'Dr. ' . $appt->Doctor->name . ' has rejected your appointment on ' . $date . '. Please request for another appointment';
+        $details = ['receipient' => $appt->Patient->User->email, 'receipient_name' => $appt->Patient->User->name, 'subject' => 'Appointment Rejected!', 'type' => 'patient_notif', 'message' => $message];
+        $this->enqueue($details);
 
         $this->mount();
         return redirect()->route('home');
@@ -84,5 +97,10 @@ class Homepage extends Component
     public function render()
     {
         return view('livewire.doctors.homepage');
+    }
+
+    public function enqueue($details)
+    {
+        SendEmail::dispatch($details);
     }
 }
