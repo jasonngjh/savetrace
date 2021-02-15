@@ -58,7 +58,7 @@
     @elseif($state['role'] == 4)
     <div class="mt-4">
         <x-jet-label for="role_id" value="{{ __('Name of Nurse') }}" />
-        <livewire:nurse-select wire:key="nurse_role" wire:model="state.role_id" placeholder="" :searchable="true" />
+        <livewire:nurse-select id="role_id" name="role_id" wire:key="nurse_role" wire:model="state.role_id" placeholder="" :searchable="true" />
         <x-jet-input-error for="role_id" class="mt-2" />
     </div>
     @endif
@@ -71,14 +71,14 @@
     @if($practice_place_link)
     <div class="flex mt-4">
         <h2>Place of Practice *</h2>
-        <button wire:key="practice_place_key" wire:model="practice_place_link" wire:click.prevent="togglePractice_place_link" class="background-transparent text-blue-700 ml-4">
+        <button wire:key="practice_place_button" wire:model="practice_place_link" wire:click.prevent="togglePractice_place_link" class="background-transparent text-blue-700 ml-4">
             {{ __('Add new Place of Practice') }}
         </button>
     </div>
     <div class="mt-4">
         <x-jet-label for="practice_place" value="{{ __('Name of Practice of Place') }}" />
-        <livewire:practice-place-select id="practice_place" name="practice_place" wire:key="practice_place_key" wire:model="state.pp_id" name="practice_place" placeholder="" :searchable="true" required />
-        <x-jet-input-error for="practice_place" class="mt-2" />
+        <livewire:practice-place-select name="practice_place" wire:key="practice_place_key" wire:model.defer="state.practice_place" placeholder="" :searchable="true" required />
+        <x-jet-input-error for="pp_id" class="mt-2" />
     </div>
     @elseif(!$practice_place_link)
     <div class="flex mt-4">

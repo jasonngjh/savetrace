@@ -61,11 +61,16 @@
 
     <div class="mt-4">
         <x-jet-label for="role" value="{{ __('Roles') }}" />
+        @if($state['roles'] == 'patient')
+        <x-jet-input id="role" name="role" type="text" class="mt-1 block w-full bg-gray-100" wire:model.defer="state.roles" disabled />
+        @else
         <select id="role" wire:model="state.roles" name="role" class="block mt-1 w-full form-input rounded-md shadow-sm">
             @foreach($roles as $role)
             <option value="{{ $role->name }}">{{ $role['name']}}</option>
             @endforeach
         </select>
+        @endif
+
     </div>
 
     <div class="flex mt-4 justify-end">

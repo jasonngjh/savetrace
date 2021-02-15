@@ -12,6 +12,9 @@
                 <h2 class="font-normal text-xl text-gray-800 leading-tight">
                     {{ $curr_date . " " . $curr_time }}
                 </h2>
+                <div class="py-1">
+                    <x-jet-validation-errors for="" />
+                </div>
             </div>
             <div class="py-4 px-4">
                 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
@@ -76,9 +79,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <x-jet-validation-errors for="" />
-                                </div>
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    @if($dateSelected or $timeSelected)
+                    @if($dateSelected and $timeSelected)
                     <div>
                         <button wire:click="confirmSubmit" wire:loading.attr="disabled">
                             Request Appointment

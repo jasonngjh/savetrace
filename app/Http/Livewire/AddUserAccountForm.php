@@ -25,11 +25,17 @@ class AddUserAccountForm extends Component
 
     protected $listeners = [
         'role_idUpdated' => 'setRoleId',
+        'practice_placeUpdated' => 'setPracticePlace',
     ];
 
     public function setRoleId($object)
     {
         $this->state['role_id'] = $object['value'];
+    }
+
+    public function setPracticePlace($object)
+    {
+        $this->state['practice_place'] = $object['value'];
     }
 
     public function mount()
@@ -66,9 +72,12 @@ class AddUserAccountForm extends Component
             ])->validate();
         } else {
             if ($this->practice_place_link) {
+                $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+                $output->writeln($this->state);
                 Validator::make($this->state, [
                     'practice_place' => ['required']
                 ])->validate();
+                $output->writeln("validate practice place");
             } else {
                 Validator::make($this->state, [
                     'place_of_practice_name' => ['required'],
@@ -137,7 +146,7 @@ class AddUserAccountForm extends Component
                     $user->save();
                 } elseif ($this->state['role'] == 4) {
                     $nurse = Nurse::create([
-                        'practice_place' => $this->state['pp_id'] ?? $practice_place->id,
+                        'practice_place' => $this->state['practice_place'] ?? $practice_place->id,
                         'user_id' => $user->id,
                     ]);
                     $user->role_id = $nurse->id;

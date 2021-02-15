@@ -73,7 +73,7 @@ class AddNewDoctorForm extends Component
                 'name' => $this->state['place_of_practice_name'],
                 'address' => $this->state['place_of_practice_address'],
                 'tel' => $this->state['place_of_practice_tel'],
-                'area' => $this->state['area'],
+                'area' => $this->state['place_of_practice_area'],
                 'opening_time' => $this->state['place_of_practice_opening_time'] ?? null,
                 'created_at' => now(),
             ]);

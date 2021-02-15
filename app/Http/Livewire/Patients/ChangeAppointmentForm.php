@@ -49,8 +49,9 @@ class ChangeAppointmentForm extends Component
         $data = ['selectedDate' => $newformat];
 
         Validator::make($data, [
-            'selectedDate' => ['required', 'after_or_equal:today']
+            'selectedDate' => ['required', 'after_or_equal:today'],
         ])->validate();
+
         $this->dateSelected = true;
     }
 
@@ -68,6 +69,7 @@ class ChangeAppointmentForm extends Component
 
     public function changeAppt()
     {
+
         $thisDate = $this->selectedDate == '' ? (new \DateTime($this->appt->date_of_appointment))->format('Y-m-d') : $this->selectedDate;
         $thisTime = $this->selectedTime == '' ? (new \DateTime($this->appt->date_of_appointment))->format('H:i') : $this->selectedTime;
         $date = new \DateTime($thisDate . ' ' . $thisTime);
