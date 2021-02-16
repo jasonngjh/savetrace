@@ -89,7 +89,7 @@ class RequestAppointmentForm extends Component
         $data = ['selectedDate' => $newformat];
 
         Validator::make($data, [
-            'selectedDate' => ['required', 'after_or_equal:today']
+            'selectedDate' => ['required', 'after:today']
         ])->validate();
 
         $this->displayTime = true;

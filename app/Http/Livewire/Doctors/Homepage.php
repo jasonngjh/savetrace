@@ -40,9 +40,6 @@ class Homepage extends Component
             ->where('to_doctor_id', '=', Auth::user()->role_id)
             ->where('viewed', '=', False)
             ->get();
-
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $output->writeln($this->referrals);
     }
 
     public function acceptAppt($appt_id)

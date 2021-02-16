@@ -201,7 +201,7 @@
                     let today = new Date();
                     this.month = today.getMonth();
                     this.year = today.getFullYear();
-                    this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
+                    // this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
                 },
 
                 isToday(date) {

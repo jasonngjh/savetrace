@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Doctor;
 use App\Models\PracticePlace;
+use App\Models\Nurse;
 
 class DoctorSeeder extends Seeder
 {
@@ -49,15 +50,6 @@ class DoctorSeeder extends Seeder
             'user_id' => 2,
         ]);
 
-        $internalDocWithOutId = Doctor::create([
-            'name' => 'Cherie Seah XinYi',
-            'registration_number' => 'M65632A',
-            'internal' => true,
-            'specialty' => 'ENT',
-            'practice_place' => $practice->id,
-            'created_at' => now(),
-        ]);
-
         $externalDocWithId = Doctor::create([
             'name' => 'Ajeet Madhav Wagle',
             'registration_number' => 'M10797B',
@@ -71,13 +63,9 @@ class DoctorSeeder extends Seeder
             'information' => 'Dr. Ajeet Madhav Wagle is a Medical Director and Senior Consultant at International Eye Cataract Retina Centre at Farrer Park Medical Centre. He specializes in the medical and surgical management of retinal diseases such as retinal detachment, macular degeneration, diabetic retinopathy, retinal vascular occlusions as well as advanced modern cataract surgery and comprehensive eye care.',
         ]);
 
-        $externalDocWithOutId = Doctor::create([
-            'name' => 'Chan Yung-Wei Stephen',
-            'registration_number' => 'M09447A',
-            'internal' => false,
-            'specialty' => 'Anaesthesiology',
-            'practice_place' => $practice2->id,
-            'created_at' => now(),
+        $employee = Nurse::create([
+            'user_id' => 4,
+            'practice_place' => $practice->id,
         ]);
     }
 }
