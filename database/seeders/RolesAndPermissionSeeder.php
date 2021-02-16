@@ -63,6 +63,7 @@ class RolesAndPermissionSeeder extends Seeder
             'email' => 'employee@savetrace.com',
             'password' => Hash::make('password'),
             'contact_number' => '98458321',
+            'role_id' => 1,
         ]);
 
         $employee->assignRole($employeeRole);

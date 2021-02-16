@@ -34,8 +34,12 @@
                                     <span class="text-sm text-gray-800 block">{{ (new DateTime($pending_appt->date_of_appointment))->format('D d M Y H:i') }}</span>
                                 </td>
                                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                                    <span class="text-sm font-semibold block">{{ $pending_appt->Patient->name }}</span>
-
+                                    <form method="GET" action="{{ route('patients.view')}}">
+                                        <input id="patient_id" name="patient_id" value="{{ $pending_appt->Patient->id }}" type="hidden">
+                                        <button class="bg-transparent hover:underline hover:text-blue-600 font-medium">
+                                            <span class="text-sm font-semibold block">{{ $pending_appt->Patient->name }}</span>
+                                        </button>
+                                    </form>
                                 </td>
                                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                                     <div class="flex justify-evenly">
@@ -84,7 +88,12 @@
                             @foreach($referrals as $referral)
                             <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                    <span class="text-sm text-gray-800 block">{{ $referral->Patient->name }}</span>
+                                    <form method="GET" action="{{ route('patients.view')}}">
+                                        <input id="patient_id" name="patient_id" value="{{ $$referral->Patient->id }}" type="hidden">
+                                        <button class="bg-transparent hover:underline hover:text-blue-600 font-medium">
+                                            <span class="text-sm text-gray-800 block">{{ $referral->Patient->name }}</span>
+                                        </button>
+                                    </form>
                                 </td>
                                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                                     <span class="text-sm font-semibold block">{{ 'Dr. '. $referral->From_Doctor->name }}</span>
