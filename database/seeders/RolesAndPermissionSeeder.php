@@ -53,7 +53,7 @@ class RolesAndPermissionSeeder extends Seeder
             'email' => 'externalDoc@externalclinic.com',
             'password' => Hash::make('password'),
             'contact_number' => '88732321',
-            'role_id' => 3,
+            'role_id' => 2,
         ]);
 
         $externalDoc->assignRole($externalDocRole);
