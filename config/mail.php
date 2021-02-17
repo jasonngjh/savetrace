@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => array_key_exists('MAIL_MAILER', $_SERVER) ? $_SERVER['MAIL_MAILER'] : env('MAIL_MAILER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => array_key_exists('MAIL_HOST', $_SERVER) ? $_SERVER['MAIL_HOST'] : env('MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => array_key_exists('MAIL_PORT', $_SERVER) ? $_SERVER['MAIL_PORT'] : env('MAIL_PORT', 587),
+            'encryption' => array_key_exists('MAIL_ENCRYPTION', $_SERVER) ? $_SERVER['MAIL_ENCRYPTION'] : env('MAIL_ENCRYPTION', 'tls'),
+            'username' => array_key_exists('MAIL_USERNAME', $_SERVER) ? $_SERVER['MAIL_USERNAME'] : env('MAIL_USERNAME'),
+            'password' => array_key_exists('MAIL_PASSWORD', $_SERVER) ? $_SERVER['MAIL_PASSWORD'] : env('MAIL_PASSWORD'),
             'timeout' => null,
             'auth_mode' => null,
         ],
