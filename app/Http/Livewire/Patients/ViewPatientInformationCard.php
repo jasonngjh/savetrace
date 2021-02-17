@@ -16,7 +16,11 @@ class ViewPatientInformationCard extends Component
         $diff = date_diff(date_create($this->patient->date_of_birth), date_create($today));
 
         if ($diff->y == 0) {
-            $this->patient->age = $diff->d . " days old";
+            if ($diff->m == 0) {
+                $this->patient->age = $diff->d . " days old";
+            } else {
+                $this->patient->age = $diff->m . " months old";
+            }
         } else {
             $this->patient->age = $diff->y . " years old";
         }
