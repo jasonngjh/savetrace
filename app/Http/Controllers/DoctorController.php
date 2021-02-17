@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\PracticePlace;

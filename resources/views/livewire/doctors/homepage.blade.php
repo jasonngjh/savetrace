@@ -135,7 +135,12 @@
                                 <span class="bg-blue-400 h-2 w-2 rounded-full block mt-2"></span>
                             </div>
                             <div class="w-10/12">
-                                <span class="text-sm font-semibold block">{{ $appt->Patient->name }}</span>
+                                <form method="GET" action="{{ route('patients.view')}}">
+                                    <input id="patient_id" name="patient_id" value="{{ $$referral->Patient->id }}" type="hidden">
+                                    <button class="bg-transparent hover:underline hover:text-blue-600 font-medium">
+                                        <span class="text-sm text-gray-800 block">{{ $appt->Patient->name }}</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         @empty

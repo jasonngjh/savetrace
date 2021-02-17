@@ -13,7 +13,7 @@
                             </h2>
                             <div>
                                 <h2 class="font-normal text-xl text-gray-800 leading-tight">
-                                    {{$patient->age}} years old
+                                    {{$patient->age}}
                                 </h2>
                             </div>
                             <div class="flex justify-between pt-4">

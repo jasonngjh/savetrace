@@ -13,8 +13,13 @@ class ViewPatientInformationCard extends Component
     {
         $this->patient = Patient::find($patient_id);
         $today = date('Y-m-d');
-        $diff = (date_diff(date_create($this->patient->date_of_birth), date_create($today)))->format('%d');;
-        $this->patient->age = $diff;
+        $diff = date_diff(date_create($this->patient->date_of_birth), date_create($today));
+
+        if ($diff->y == 0) {
+            $this->patient->age = $diff->d . " days old";
+        } else {
+            $this->patient->age = $diff->y . " years old";
+        }
     }
 
     public function render()
