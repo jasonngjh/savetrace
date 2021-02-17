@@ -34,18 +34,6 @@ php artisan key:generate
 php artisan storage:link
 ```
 
-### Change App URL
-
-1. open .env file inside savetrace folder
-2. remove everything after APP_URL=
-
-```
-APP_DEBUG=true
-APP_URL=
-
-LOG_CHANNEL=stack
-```
-
 ### Starting Database
 
 1. Start XAMPP
