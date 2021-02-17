@@ -3,9 +3,6 @@
 /public/storage
 /storage/*.key
 /storage/app/livewire-tmp/*
-/storage/app/public/profile-photos/*
-/storage/app/public/records/*
-/storage/app/public/referrals/*
 /vendor
 .env
 .env.backup
