@@ -32,14 +32,14 @@ class DoctorSeeder extends Seeder
             fclose($handle);
         }
 
-        if (($handle = fopen("/database/testdata/nurses.csv", "r")) !== FALSE) {
+        if (($handle = fopen("database/testdata/nurses.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $nurses_data[] = $data;
             }
             fclose($handle);
         }
 
-        if (($handle = fopen("/database/testdata/doctors.csv", "r")) !== FALSE) {
+        if (($handle = fopen("database/testdata/doctors.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $doctors_data[] = $data;
             }
