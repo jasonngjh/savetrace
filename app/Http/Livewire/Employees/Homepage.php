@@ -34,7 +34,13 @@ class Homepage extends Component
             ->groupBy('id')
             ->get();
 
-        $this->doctors_id = $doctors_id->forget('profile_photo_url');
+        $doctorsArray = array();
+
+        foreach ($doctors_id as $doctor) {
+            array_push($doctorsArray, $doctor->id);
+        }
+
+        $this->doctors_id = $doctorsArray;
     }
 
     public function filterWeek()
@@ -79,12 +85,12 @@ class Homepage extends Component
     public function render()
     {
         return view('livewire.employees.homepage', [
-            'sent_referrals' => Referral::where('created_at', '>=', $this->days ? $this->days : '')
+            'sent_referrals' => Referral::where('created_at', '>=', $this->days ? $this->days : \Carbon\Carbon::today()->subDays(0))
                 ->whereIn('from_doctor_id', $this->doctors_id)
                 ->orderBy('created_at')
                 ->paginate(30),
 
-            'received_referrals' => Referral::where('created_at', '>=', $this->days ? $this->days : '')
+            'received_referrals' => Referral::where('created_at', '>=', $this->days ? $this->days : \Carbon\Carbon::today()->subDays(0))
                 ->whereIn('to_doctor_id', $this->doctors_id)
                 ->orderBy('created_at')
                 ->paginate(30),
