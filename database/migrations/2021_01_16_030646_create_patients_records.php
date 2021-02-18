@@ -19,6 +19,7 @@ class CreatePatientsRecords extends Migration
             $table->foreignId('patient_id')->constrained('patients');
             $table->foreignId('doctor_id')->constrained('doctors');
             $table->string('name_of_record');
+            $table->boolean('is_prescription');
             $table->text('information')->nullable();
             $table->text('file_path')->nullable();
         });

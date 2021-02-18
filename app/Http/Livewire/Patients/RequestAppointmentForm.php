@@ -84,6 +84,8 @@ class RequestAppointmentForm extends Component
     {
         $this->resetErrorBag();
         $this->displayTime = false;
+        $this->setApptTime();
+        $this->mount();
         $time = strtotime($this->selectedDate);
         $newformat = date('Y-m-d', $time);
         $data = ['selectedDate' => $newformat];
@@ -92,6 +94,19 @@ class RequestAppointmentForm extends Component
             'selectedDate' => ['required', 'after:today']
         ])->validate();
 
+        $docAppt = Appointment::select('date_of_appointment')
+            ->where('doctor_id', '=', $this->selectedDoctor->first()->id)
+            ->where('date_of_appointment', 'like', "%{$newformat}%")
+            ->get();
+
+        $doctorTime = array();
+
+        foreach ($docAppt as $appt) {
+            array_push($doctorTime, date_format(date_create_from_format('Y-m-d H:i:s', $appt->date_of_appointment), 'H:i'));
+        }
+
+        $apptTime = $this->appt_time;
+        $this->appt_time = array_diff($apptTime, $doctorTime);
         $this->displayTime = true;
     }
 

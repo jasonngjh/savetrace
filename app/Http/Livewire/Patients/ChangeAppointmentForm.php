@@ -43,6 +43,15 @@ class ChangeAppointmentForm extends Component
     {
         $this->resetErrorBag();
         $this->dateSelected = false;
+        unset($this->appt_time);
+        $this->appt_time = array();
+        $startTime = (new \DateTime('08:30'))->format('H:i');
+        $endTime = '18:00';
+        array_push($this->appt_time, $startTime);
+        do {
+            $newTime = (new \DateTime(end($this->appt_time)))->add(new DateInterval('PT' . 30 . 'M'));
+            array_push($this->appt_time, $newTime->format('H:i'));
+        } while (strcmp(end($this->appt_time), $endTime) == true);
 
         $time = strtotime($this->selectedDate);
         $newformat = date('Y-m-d', $time);
@@ -52,6 +61,19 @@ class ChangeAppointmentForm extends Component
             'selectedDate' => ['required', 'after_or_equal:today'],
         ])->validate();
 
+        $docAppt = Appointment::select('date_of_appointment')
+            ->where('doctor_id', '=', $this->appt->doctor_id)
+            ->where('date_of_appointment', 'like', "%{$newformat}%")
+            ->get();
+
+        $doctorTime = array();
+
+        foreach ($docAppt as $appt) {
+            array_push($doctorTime, date_format(date_create_from_format('Y-m-d H:i:s', $appt->date_of_appointment), 'H:i'));
+        }
+
+        $apptTime = $this->appt_time;
+        $this->appt_time = array_diff($apptTime, $doctorTime);
         $this->dateSelected = true;
     }
 

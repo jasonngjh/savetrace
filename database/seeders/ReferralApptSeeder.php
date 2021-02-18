@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
+use App\Models\Patient_record;
 use App\Models\Referral;
 
 class ReferralApptSeeder extends Seeder
@@ -19,6 +20,7 @@ class ReferralApptSeeder extends Seeder
     {
         $referral_data = array();
         $appt_data = array();
+        $records_data = array();
 
         if (($handle = fopen("database/testdata/appointments.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -30,6 +32,13 @@ class ReferralApptSeeder extends Seeder
         if (($handle = fopen("database/testdata/referrals.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $referral_data[] = $data;
+            }
+            fclose($handle);
+        }
+
+        if (($handle = fopen("database/testdata/patient_records.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $records_data[] = $data;
             }
             fclose($handle);
         }
@@ -66,6 +75,23 @@ class ReferralApptSeeder extends Seeder
                 'visited_on' =>  null,
                 'viewed' =>  $ref[7],
                 'file_path' => '/public/referrals/161364056212',
+            ]);
+        }
+
+        $record_count = 0;
+        foreach ($records_data as $rec) {
+            if ($record_count == 0) {
+                $record_count++;
+                continue;
+            }
+
+            Patient_record::create([
+                'patient_id' => (Patient::where('name', '=', $rec[3])->get())->first()->id,
+                'doctor_id' => (Doctor::where('name', '=', $rec[4])->get())->first()->id,
+                'name_of_record' => $rec[6],
+                'information' => $rec[7],
+                'is_prescription' => $rec[5],
+                'file_path' => '/public/records/161365153811',
             ]);
         }
     }

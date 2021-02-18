@@ -21,6 +21,7 @@ class Patient_record extends Model
         'name_of_record',
         'information',
         'file_path',
+        'is_prescription',
     ];
 
     /**

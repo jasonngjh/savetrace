@@ -163,6 +163,15 @@ class PatientController extends Controller
         return view('patients.view_referrals', ['referrals' => $referrals]);
     }
 
+    public function viewPrescription()
+    {
+        $prescription = Patient_record::where('patient_id', '=', Auth::user()->role_id)
+            ->where('is_prescription', '=', 1)
+            ->get();
+
+        return view('patients.view_prescription', ['prescription' => $prescription]);
+    }
+
     public function viewAppointments()
     {
         $appointments = Appointment::where('patient_id', '=', Auth::user()->role_id)
@@ -235,6 +244,7 @@ class PatientController extends Controller
             'patient_id' => $request->get('patient_id'),
             'doctor_id' => Auth::user()->role_id,
             'name_of_record' => $request->get('name_of_record'),
+            'is_prescription' => $request->has('prescription') ? True : False,
             'information' => $request->get('information'),
             'file_path' => $request->file('file') ? $filePath : '',
         ]);

@@ -16,8 +16,9 @@ class Homepage extends Component
 
     public function mount()
     {
-        $records = Patient::find(Auth::user()->role_id)
-            ->Patient_record;
+        $records = Patient_record::where('patient_id', '=', Auth::user()->role_id)
+            ->where('is_prescription', '=', 0)
+            ->get();
         $this->medical_records = $records;
     }
 

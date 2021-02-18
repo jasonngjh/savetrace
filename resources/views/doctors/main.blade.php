@@ -2,9 +2,9 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             @if(Route::currentRouteName() == "internaldocs")
-            Manage Internal Doctors
+            Administer Internal Doctors
             @elseif(Route::currentRouteName() == "externaldocs")
-            Manage External Doctors
+            Administer External Doctors
             @endif
         </h2>
     </x-slot>

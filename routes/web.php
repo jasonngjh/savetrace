@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/appointments/new', [PatientController::class, 'newAppt'])->name('appointments.new');
         Route::get('/appointments/change/{id}', [PatientController::class, 'changeAppt'])->name('appointments.change');
         Route::get('/appointments/delete/{id}', [PatientController::class, 'delete'])->name('appointments.delete');
+        Route::get('/prescriptions', [PatientController::class, 'viewPrescription'])->name('prescription');
     });
 
     Route::middleware(['role:internal|external|nurse'])->group(function () {

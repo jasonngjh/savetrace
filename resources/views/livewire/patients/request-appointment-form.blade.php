@@ -128,8 +128,8 @@
                         <div class="flex flex-wrap">
                             @foreach($appt_time as $time)
                             <div class="px-4">
-                                <label class="inline-flex items-center">
-                                    <input type="radio" class="form-radio" wire:model="selectedTime" name="radio" value="{{$time}}">
+                                <label class="inline-flex items-center disabled">
+                                    <input type="radio" class="form-radio disabled" wire:model="selectedTime" name="radio" value="{{$time}}">
                                     <span class="ml-2">{{$time}}</span>
                                 </label>
                             </div>

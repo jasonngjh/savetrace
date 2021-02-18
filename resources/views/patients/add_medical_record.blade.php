@@ -27,7 +27,9 @@
                     </textarea>
                     <x-jet-input-error for="information" class="mt-2" />
                 </div>
-
+                <label class="inline-flex items-center mt-3">
+                    <input type="checkbox" id="prescription" name="prescription" class="form-checkbox h-5 w-5 text-blue-600"><span class="ml-2 text-gray-700">This is a prescription</span>
+                </label>
                 <div x-data="{fileName: null}" class="py-2  col-span-6 sm:col-span-4">
                     <x-jet-label for="file" value="{{ __('Medical Record File *pdf files only') }}" />
                     <input id="file" name="file" type="file" class="hidden" x-ref="file" x-on:change="
