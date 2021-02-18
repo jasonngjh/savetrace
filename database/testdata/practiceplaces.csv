@@ -1,0 +1,37 @@
+﻿id,created_at,updated_at,name,address,tel,area,opening_time,deleted_at
+1,2021-02-17 13:50:25,2021-02-17 14:21:24,Gregory Private Hospital,Kallang Way 5,8111 1111,C,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+2,2021-02-18 13:50:25,2021-02-18 14:21:24,Queen's Clinic,Genting Lane,82222 2222,C,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+3,2021-02-19 13:50:25,2021-02-19 14:21:24,Lee's Pracetice,Siang Kuang Avenue,8333 3333,N,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+4,2021-02-20 13:50:25,2021-02-20 14:21:24,Fook Mi Hospital,Macpherson Road,8444 4444,N,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+5,2021-02-21 13:50:25,2021-02-21 14:21:24,Lee Wah Hospital,Macpherson Road,8555 5555,N,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+6,2021-02-22 13:50:25,2021-02-22 14:21:24,Seattle Grace Hospital,Kallang Way 1,8666 6666,S,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+7,2021-02-23 13:50:25,2021-02-23 14:21:24,Grey Sloan Memorial Hospital,Butterfly Avenue,8777 7777,S,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+8,2021-02-24 13:50:25,2021-02-24 14:21:24,Changi Hospital,Lorong Kembang,8888 88888,S,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+9,2021-02-25 13:50:25,2021-02-25 14:21:24,Singapore General Hospital,Jalan Wangi,8999 9999,E,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+10,2021-02-26 13:50:25,2021-02-26 14:21:24,Khoo Teck Phuat Hospital,Butterfly Avenue,9111 1111,E,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+11,2021-02-27 13:50:25,2021-02-27 14:21:24,Ng Seng Clinic,Kallang Way,9222 2222,E,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
+12,2021-02-28 13:50:25,2021-02-28 14:21:24,Teo Heng Hospital,Butterfly Avenue,9333 3333,W,"Mon - Fri: 8:30 a.m. - 12:30 p.m.
+            1:30 p.m. - 5 p.m.
+            Sat: 8:30 a.m. - 12:30 p.m.",
