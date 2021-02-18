@@ -29,10 +29,16 @@ class PatientController extends Controller
         $data = DB::transaction(function () {
             $practice_place = Doctor::find(Auth::user()->role_id, ['practice_place']);
 
-            $doctorsUnderSamePlace = Doctor::select('id')
+            $doctors_under = Doctor::select('id')
                 ->where('practice_place', '=', $practice_place->practice_place)
                 ->groupBy('id')
                 ->get();
+
+            $doctorsUnderSamePlace = array();
+
+            foreach ($doctors_under as $doctor) {
+                array_push($doctorsUnderSamePlace, $doctor->id);
+            }
 
             $doctorPatientAppointment = Appointment::select('patient_id')
                 ->whereIn('doctor_id', $doctorsUnderSamePlace)
@@ -53,8 +59,17 @@ class PatientController extends Controller
 
         foreach ($data as $patient) {
             $today = date('Y-m-d');
-            $diff = (date_diff(date_create($patient->date_of_birth), date_create($today)))->format('%d');;
-            $patient->age = $diff;
+            $diff = date_diff(date_create($patient->date_of_birth), date_create($today));
+
+            if ($diff->y == 0) {
+                if ($diff->m == 0) {
+                    $patient->age = $diff->d . " days old";
+                } else {
+                    $patient->age = $diff->m . " months old";
+                }
+            } else {
+                $patient->age = $diff->y . " years old";
+            }
         }
 
         return view('patients.index', ['patients' => $data]);

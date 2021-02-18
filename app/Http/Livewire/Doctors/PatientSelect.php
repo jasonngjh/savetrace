@@ -18,10 +18,16 @@ class PatientSelect extends LivewireSelect
         $data = DB::transaction(function () {
             $practice_place = Doctor::find(Auth::user()->role_id, ['practice_place']);
 
-            $doctorsUnderSamePlace = Doctor::select('id')
+            $doctors_under = Doctor::select('id')
                 ->where('practice_place', '=', $practice_place->practice_place)
                 ->groupBy('id')
                 ->get();
+
+            $doctorsUnderSamePlace = array();
+
+            foreach ($doctors_under as $doctor) {
+                array_push($doctorsUnderSamePlace, $doctor->id);
+            }
 
             $doctorPatientAppointment = Appointment::select('patient_id')
                 ->whereIn('doctor_id', $doctorsUnderSamePlace)

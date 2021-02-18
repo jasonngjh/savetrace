@@ -89,7 +89,7 @@
                             <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                                     <form method="GET" action="{{ route('patients.view')}}">
-                                        <input id="patient_id" name="patient_id" value="{{ $$referral->Patient->id }}" type="hidden">
+                                        <input id="patient_id" name="patient_id" value="{{ $referral->Patient->id }}" type="hidden">
                                         <button class="bg-transparent hover:underline hover:text-blue-600 font-medium">
                                             <span class="text-sm text-gray-800 block">{{ $referral->Patient->name }}</span>
                                         </button>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="w-10/12">
                                 <form method="GET" action="{{ route('patients.view')}}">
-                                    <input id="patient_id" name="patient_id" value="{{ $$referral->Patient->id }}" type="hidden">
+                                    <input id="patient_id" name="patient_id" value="{{ $appt->patient_id }}" type="hidden">
                                     <button class="bg-transparent hover:underline hover:text-blue-600 font-medium">
                                         <span class="text-sm text-gray-800 block">{{ $appt->Patient->name }}</span>
                                     </button>
