@@ -72,12 +72,9 @@ class AddUserAccountForm extends Component
             ])->validate();
         } else {
             if ($this->practice_place_link) {
-                $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-                $output->writeln($this->state);
                 Validator::make($this->state, [
                     'practice_place' => ['required']
                 ])->validate();
-                $output->writeln("validate practice place");
             } else {
                 Validator::make($this->state, [
                     'place_of_practice_name' => ['required'],
@@ -138,7 +135,7 @@ class AddUserAccountForm extends Component
                         'internal' => $this->state['role'] == 2 ? True : False,
                         'specialty' => $this->state['specialty'],
                         'information' => $this->state['information'] ?? null,
-                        'practice_place' => $this->state['pp_id'] ?? $practice_place->id,
+                        'practice_place' => $this->state['practice_place'] ?? $practice_place->id,
                         'user_id' => $user->id,
                     ]);
 

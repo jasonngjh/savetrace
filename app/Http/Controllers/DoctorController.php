@@ -22,9 +22,6 @@ class DoctorController extends Controller
 
     public function admin_main()
     {
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln("Route in index: " . Route::currentRouteName());
-
         $internal = (Route::currentRouteName() == "internaldocs") ? true : false;
 
         $data = Doctor::where('internal', '=', $internal)

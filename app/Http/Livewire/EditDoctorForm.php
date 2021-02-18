@@ -34,9 +34,6 @@ class EditDoctorForm extends Component
     {
         $this->state = $doctor->toArray();
 
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $output->writeln($this->state);
-
         $user = User::find($this->state['user_id']);
         if ($user) {
             $user_details = $user->name . " - " . $user->email;
@@ -63,9 +60,6 @@ class EditDoctorForm extends Component
         if (isset($this->photo)) {
             $doctor->updateProfilePhoto($this->photo);
         }
-
-        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $output->writeln($doctor);
 
         $doctor->forceFill([
             'registration_number' => $this->state['registration_number'],

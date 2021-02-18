@@ -93,9 +93,6 @@ class PatientController extends Controller
 
     public function search(Request $request)
     {
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln("");
-
         if ($request->filled('q')) {
             $searchParams = trim($request->get('q'));
 

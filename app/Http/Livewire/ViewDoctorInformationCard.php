@@ -16,9 +16,6 @@ class ViewDoctorInformationCard extends Component
             ->find($doctor_id, ['name', 'registration_number', 'email', 'contact', 'fax', 'internal', 'specialty', 'profile_photo_path', 'information', 'practice_place'])
             ->toArray();
 
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln($this->doctor['name']);
-
         $this->doctor['practice_place_details'] = PracticePlace::find($this->doctor['practice_place'])->toArray();
     }
 

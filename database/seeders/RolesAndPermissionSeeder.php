@@ -38,34 +38,34 @@ class RolesAndPermissionSeeder extends Seeder
 
         $admin->assignRole($adminRole);
 
-        // $internalDoc = User::factory()->create([
-        //     'name' => 'internal doctor',
-        //     'email' => 'internalDoc@savetrace.com',
-        //     'password' => Hash::make('password'),
-        //     'contact_number' => '88732321',
-        //     'role_id' => 1,
-        // ]);
+        $internalDoc = User::factory()->create([
+            'name' => 'internal doctor',
+            'email' => 'internalDoc@savetrace.com',
+            'password' => Hash::make('password'),
+            'contact_number' => '88732321',
+            'role_id' => 1,
+        ]);
 
-        // $internalDoc->assignRole($internalDocRole);
+        $internalDoc->assignRole($internalDocRole);
 
-        // $externalDoc = User::factory()->create([
-        //     'name' => 'external doctor',
-        //     'email' => 'externalDoc@externalclinic.com',
-        //     'password' => Hash::make('password'),
-        //     'contact_number' => '88732321',
-        //     'role_id' => 2,
-        // ]);
+        $externalDoc = User::factory()->create([
+            'name' => 'external doctor',
+            'email' => 'externalDoc@externalclinic.com',
+            'password' => Hash::make('password'),
+            'contact_number' => '88732321',
+            'role_id' => 2,
+        ]);
 
-        // $externalDoc->assignRole($externalDocRole);
+        $externalDoc->assignRole($externalDocRole);
 
-        // $employee = User::factory()->create([
-        //     'name' => 'employee',
-        //     'email' => 'employee@savetrace.com',
-        //     'password' => Hash::make('password'),
-        //     'contact_number' => '98458321',
-        //     'role_id' => 1,
-        // ]);
+        $employee = User::factory()->create([
+            'name' => 'employee',
+            'email' => 'employee@savetrace.com',
+            'password' => Hash::make('password'),
+            'contact_number' => '98458321',
+            'role_id' => 1,
+        ]);
 
-        // $employee->assignRole($employeeRole);
+        $employee->assignRole($employeeRole);
     }
 }
