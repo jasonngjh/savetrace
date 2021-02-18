@@ -33,7 +33,7 @@ Route::middleware(['auth'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['role:system admin'])->group(function () {
+    Route::middleware(['role:SystemAdmin'])->group(function () {
         // user accounts
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])->name('users');

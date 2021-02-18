@@ -9,6 +9,7 @@ use App\Models\PracticePlace;
 use App\Models\Nurse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DoctorSeeder extends Seeder
 {
@@ -107,6 +108,8 @@ class DoctorSeeder extends Seeder
 
                         $thisuser->role_id = $thisdoctor->id;
                         $thisuser->save();
+
+                        $thisuser->assignRole((Role::where('name', '=', $user[13])->get())->first()->name);
                     }
                 }
             } elseif ($user[13] == 'nurse') {
@@ -119,6 +122,7 @@ class DoctorSeeder extends Seeder
 
                         $thisuser->role_id = $thisnurse->id;
                         $thisuser->save();
+                        $thisuser->assignRole((Role::where('name', '=', 'nurse')->get())->first()->name);
                     }
                 }
             } else {
@@ -137,6 +141,7 @@ class DoctorSeeder extends Seeder
 
                         $thisuser->role_id = $thispatient->id;
                         $thisuser->save();
+                        $thisuser->assignRole((Role::where('name', '=', 'patient')->get())->first()->name);
                     }
                 }
             }
