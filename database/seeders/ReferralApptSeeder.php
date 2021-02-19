@@ -90,7 +90,7 @@ class ReferralApptSeeder extends Seeder
                 'name_of_record' => $rec[6],
                 'information' => $rec[7],
                 'is_prescription' => $rec[5],
-                'file_path' => '/public/records/161364109411',
+                'file_path' => '/public/records/161366392611',
             ]);
         }
     }

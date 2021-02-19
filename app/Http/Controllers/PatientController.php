@@ -262,6 +262,9 @@ class PatientController extends Controller
     {
         $patient_record = Patient_record::find($record_id);
 
+        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        // $output->writeln($patient_record);
+
         $encryptedContents = Storage::get($patient_record->file_path);
         $decryptedContents = Crypt::decrypt($encryptedContents);
 
