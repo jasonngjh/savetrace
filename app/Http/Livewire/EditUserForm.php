@@ -35,7 +35,7 @@ class EditUserForm extends Component
     {
         $this->state = $user->toArray();
         $userRoles = reset($this->state['roles']);
-        $this->state['roles'] = $userRoles['name'];
+        $this->state['roles'] = $userRoles['id'];
 
         $this->roles = Role::where('name', '!=', 'patient')
             ->get();
@@ -54,6 +54,11 @@ class EditUserForm extends Component
             if ($user->hasRole(['internal', 'external'])) {
                 $doctor = Doctor::find($user->role_id);
                 $doctor->profile_photo_path = $user->profile_photo_path;
+                if ($this->state['roles'] == 2) {
+                    $doctor->internal = true;
+                } elseif ($this->state['roles'] == 3) {
+                    $doctor->internal = false;
+                }
                 $doctor->save();
             } else {
                 $patient = Patient::find($user->role_id);

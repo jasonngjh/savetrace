@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Livewire\Component;
+use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\Nurse;
 
 class DeleteUserButton extends Component
 {
@@ -75,7 +78,18 @@ class DeleteUserButton extends Component
             ]);
         }
 
+        if ($this->user->role_id) {
+            if ($this->user->getRoleNames()->first() == 'internal' or $this->user->getRoleNames()->first() == 'external') {
+                Doctor::findOrFail($this->user->role_id)->delete();
+            } elseif ($this->user->getRoleNames()->first() == 'nurse') {
+                Nurse::findOrFail($this->user->role_id)->delete();
+            } elseif ($this->user->getRoleNames()->first() == 'patient') {
+                Patient::findOrFail($this->user->role_id)->delete();
+            }
+        }
+
         $this->user->removeRole($this->user->roles->first());
+
         $deleter->delete($this->user->fresh());
 
         return redirect()->route('users');

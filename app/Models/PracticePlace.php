@@ -23,7 +23,11 @@ class PracticePlace extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'address', 'tel', 'opening_time', 'area'
+        'name',
+        'address',
+        'tel',
+        'opening_time',
+        'area'
     ];
 
     public function doctor()

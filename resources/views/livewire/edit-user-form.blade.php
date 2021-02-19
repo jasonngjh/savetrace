@@ -66,7 +66,7 @@
         @else
         <select id="role" wire:model="state.roles" name="role" class="block mt-1 w-full form-input rounded-md shadow-sm">
             @foreach($roles as $role)
-            <option value="{{ $role->name }}">{{ $role['name']}}</option>
+            <option value="{{ $role->id }}">{{ $role['name']}}</option>
             @endforeach
         </select>
         @endif

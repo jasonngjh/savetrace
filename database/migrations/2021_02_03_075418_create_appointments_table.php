@@ -18,7 +18,6 @@ class CreateAppointmentsTable extends Migration
             $table->timestamps();
             $table->foreignId('patient_id')->constrained('patients');
             $table->foreignId('doctor_id')->constrained('doctors');
-            $table->foreignId('referral_id')->nullable()->constrained('referrals');
             $table->timestamp('date_of_appointment', $precision = 0)->nullable()->default(null);
             $table->boolean('doctor_confirmation')->default(false);
             $table->boolean('cancelled')->default(false);

@@ -61,7 +61,7 @@ class DeleteDoctorButton extends Component
 
         $doctor = Doctor::find($this->doctor['id']);
 
-        if ($doctor->user_id != null) {
+        if (!is_null($doctor->user_id)) {
             $this->removeRoleIdFromUser($doctor);
         }
         $doctor->delete();
@@ -72,9 +72,8 @@ class DeleteDoctorButton extends Component
     protected function removeRoleIdFromUser($doctor)
     {
         $user = User::find($doctor->user_id);
-        $user->forceFill([
-            'role_id' => null,
-        ])->save();
+        $user->role_id = null;
+        $user->save();
     }
 
     public function render()

@@ -15,11 +15,6 @@ use App\Jobs\SendEmail;
 
 class DoctorController extends Controller
 {
-    public function index()
-    {
-        return view('doctors.dashboard');
-    }
-
     public function admin_main()
     {
         $internal = (Route::currentRouteName() == "internaldocs") ? true : false;

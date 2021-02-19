@@ -10,17 +10,6 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function roleInformationExists(User $user)
-    {
-        if (Doctor::where('user_id', '=', $user->id)->firstOrFail()) {
-            return true;
-        }
-        if (Patient::where('user_id', '=', $user->id)->firstOrFail()) {
-            return true;
-        }
-        return false;
-    }
-
     public function index()
     {
         $users = User::with('roles')->paginate(15, ['id', 'name', 'email', 'contact_number']);

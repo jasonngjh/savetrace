@@ -53,7 +53,6 @@ class ReferralApptSeeder extends Seeder
             Appointment::create([
                 'patient_id' => (Patient::where('name', '=', $appt[3])->get())->first()->id,
                 'doctor_id' => (Doctor::where('name', '=', $appt[4])->get())->first()->id,
-                'referral_id' =>  null,
                 'date_of_appointment' => date_format(date_create_from_format('d/n/y H:i', $appt[6]), 'Y-m-d H:i'),
                 'doctor_confirmation' => $appt[7],
                 'cancelled' => $appt[8],
@@ -91,7 +90,7 @@ class ReferralApptSeeder extends Seeder
                 'name_of_record' => $rec[6],
                 'information' => $rec[7],
                 'is_prescription' => $rec[5],
-                'file_path' => '/public/records/161365153811',
+                'file_path' => '/public/records/161364109411',
             ]);
         }
     }

@@ -17,7 +17,6 @@ class Appointment extends Model
     protected $fillable = [
         'patient_id',
         'doctor_id',
-        'referral_id',
         'date_of_appointment',
         'doctor_confirmation',
         'cancelled',
@@ -38,10 +37,5 @@ class Appointment extends Model
     public function Patient()
     {
         return $this->hasOne(Patient::class, 'id', 'patient_id')->withTrashed();
-    }
-
-    public function Referral()
-    {
-        return $this->hasOne(Referral::class, 'id', 'referral_id');
     }
 }

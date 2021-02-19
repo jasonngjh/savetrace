@@ -45,7 +45,7 @@ class Homepage extends Component
     public function acceptAppt($appt_id)
     {
         $appt = Appointment::find($appt_id);
-        $appt->doctor_confirmation = True;
+        $appt->doctor_confirmation = true;
         $appt->save();
 
         //send email to notify patient
@@ -61,7 +61,7 @@ class Homepage extends Component
     public function rejectAppt($appt_id)
     {
         $appt = Appointment::find($appt_id);
-        $appt->cancelled = False;
+        $appt->cancelled = true;
         $appt->save();
 
         //send email to notify patient

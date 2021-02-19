@@ -3,22 +3,22 @@
 namespace App\Http\Livewire\Patients;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Patient_record;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use DateTime;
 
-class Homepage extends Component
+class ViewPrescriptionPage extends Component
 {
-    public $medical_records;
+    public $prescription;
 
     public function mount()
     {
-        $records = Patient_record::where('patient_id', '=', Auth::user()->role_id)
-            ->where('is_prescription', '=', 0)
+        $prescription = Patient_record::where('patient_id', '=', Auth::user()->role_id)
+            ->where('is_prescription', '=', 1)
             ->get();
-        $this->medical_records = $records;
+        $this->prescription = $prescription;
     }
 
     public function downRecord($record_id)
@@ -39,6 +39,6 @@ class Homepage extends Component
 
     public function render()
     {
-        return view('livewire.patients.homepage');
+        return view('livewire.patients.view-prescription-page');
     }
 }
