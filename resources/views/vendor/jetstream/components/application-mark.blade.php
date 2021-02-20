@@ -1,10 +1,10 @@
-<!-- <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
+<!-- <svg viewBox="0 0 48 48" fill="none" xmlns="https://www.w3.org/2000/svg" {{ $attributes }}>
   <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5" />
   <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5" />
 </svg> -->
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="-0.9999999999999929 -1 119.83116883116887 44.00000000000001" width="118.83" height="40">
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="-0.9999999999999929 -1 119.83116883116887 44.00000000000001" width="118.83" height="40">
   <defs>
     <path d="M27.98 8.62C27.98 9.57 27.42 10.35 26.72 10.35C26.03 10.35 25.46 9.57 25.46 8.62C25.46 7.67 26.03 6.89 26.72 6.89C27.42 6.89 27.98 7.67 27.98 8.62Z" id="a2NnNI6ws"></path>
     <path d="M22.54 3.06C22.54 4.01 21.98 4.79 21.28 4.79C20.59 4.79 20.02 4.01 20.02 3.06C20.02 2.11 20.59 1.33 21.28 1.33C21.98 1.33 22.54 2.11 22.54 3.06Z" id="dCGdmBPKq"></path>
