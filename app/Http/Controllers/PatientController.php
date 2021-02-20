@@ -258,25 +258,6 @@ class PatientController extends Controller
         return redirect()->route('patients.view', ['patient_id' => $request->get('patient_id')]);
     }
 
-    public function downRecord($record_id)
-    {
-        $patient_record = Patient_record::find($record_id);
-
-        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
-        // $output->writeln($patient_record);
-
-        $encryptedContents = Storage::get($patient_record->file_path);
-        $decryptedContents = Crypt::decrypt($encryptedContents);
-
-        $getDate = (new DateTime($patient_record->created_at))->format('YmdHis');
-        $basicfile = str_replace(' ', '', $patient_record->name_of_record);
-        $file_name = "{$getDate}{$patient_record->doctor_id}{$patient_record->patient_id}_{$basicfile}.pdf";
-
-        return response()->streamDownload(function () use ($decryptedContents) {
-            echo $decryptedContents;
-        }, $file_name);
-    }
-
     public function enqueue($details)
     {
         SendEmail::dispatch($details);
