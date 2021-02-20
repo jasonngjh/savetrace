@@ -83,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/patients/download/record/{id}', [PatientController::class, 'downRecord'])->name('patients.download.record');
 
         Route::get('/doctors', [DoctorController::class, 'retrieve_all_doctors'])->name('doctors');
-        Route::get('/doctors/search', [PatientController::class, 'search'])->name('doctors.search');
+        Route::get('/doctors/search', [DoctorController::class, 'search'])->name('doctors.search');
 
         Route::get('/referrals/add/{id}', [DoctorController::class, 'addReferral'])->name('referral.add');
         Route::post('/referrals/add', [DoctorController::class, 'addReferralPost'])->name('referral.add.post');
