@@ -35,7 +35,7 @@ class EditUserForm extends Component
     {
         $this->state = $user->toArray();
         $userRoles = reset($this->state['roles']);
-        $this->state['roles'] = $userRoles['id'];
+        $this->state['roles'] = $userRoles;
 
         $this->roles = Role::where('name', '!=', 'patient')
             ->get();
@@ -48,7 +48,7 @@ class EditUserForm extends Component
         $updater->update($user, $this->photo ? array_merge($this->state, ['photo' => $this->photo])
             : $this->state);
 
-        $user->syncRoles([$this->state['roles']]);
+        $user->syncRoles([$this->state['roles']['id']]);
 
         if ($user->role_id) {
             if ($user->hasRole(['internal', 'external'])) {
